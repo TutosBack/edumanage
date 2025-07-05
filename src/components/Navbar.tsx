@@ -1,95 +1,243 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, Home, Book, Upload, Users, GraduationCap, Settings, UserCog } from 'lucide-react';
+import { 
+  Search, 
+  Bell, 
+  MessageSquare, 
+  Settings, 
+  User, 
+  LogOut, 
+  GraduationCap,
+  ChevronDown,
+  Menu,
+  X
+} from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const { user, school, logout } = useAuth();
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
 
-  const getRoleNavItems = () => {
-    if (!user) return [];
-
-    const items = [
-      { to: '/dashboard', label: 'Dashboard', icon: Home }
-    ];
-
-    switch (user.role) {
-      case 'super_admin':
-        items.push(
-          { to: '/schools', label: 'Schools', icon: GraduationCap },
-          { to: '/admin/create-school', label: 'Create School', icon: Settings }
-        );
-        break;
-      case 'school_admin':
-        items.push(
-          { to: '/courses', label: 'Courses', icon: Book },
-          { to: '/admin/manage-users', label: 'Manage Users', icon: UserCog },
-          { to: '/admin/create-user', label: 'Add User', icon: Users }
-        );
-        break;
-      case 'teacher':
-        items.push(
-          { to: '/courses', label: 'My Courses', icon: Book },
-          { to: '/materials/upload', label: 'Upload Material', icon: Upload }
-        );
-        break;
-      case 'student':
-        items.push(
-          { to: '/courses', label: 'Courses', icon: Book },
-          { to: '/materials', label: 'Materials', icon: Upload }
-        );
-        break;
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      // Implement search functionality
+      console.log('Searching for:', searchQuery);
+      alert(`Searching for: ${searchQuery}`);
     }
-
-    return items;
   };
 
+  const notifications = [
+    { id: 1, title: 'New material uploaded', time: '5 min ago', unread: true },
+    { id: 2, title: 'Course assignment due', time: '1 hour ago', unread: true },
+    { id: 3, title: 'Grade posted', time: '2 hours ago', unread: false },
+  ];
+
+  const unreadCount = notifications.filter(n => n.unread).length;
+
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-200 fixed w-full top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <Link to="/dashboard" className="flex items-center space-x-2">
-              <GraduationCap className="h-8 w-8 text-blue-600" />
-              <span className="text-xl font-bold text-gray-900">Educate</span>
-            </Link>
+    <nav className="navbar-enhanced">
+      <div className="navbar-container">
+        {/* Logo and Brand */}
+        <div className="navbar-brand">
+          <button
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            className="navbar-mobile-toggle lg:hidden"
+          >
+            {showMobileMenu ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+          
+          <div className="navbar-logo">
+            <GraduationCap className="h-8 w-8 text-company-primary" />
+            <span className="navbar-logo-text">Educate</span>
+          </div>
+        </div>
+
+        {/* Search Bar */}
+        <div className="navbar-search">
+          <form onSubmit={handleSearch} className="search-form">
+            <div className="search-input-container">
+              <Search className="search-icon" />
+              <input
+                type="text"
+                placeholder="Search courses, materials, users..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+              />
+            </div>
+          </form>
+        </div>
+
+        {/* Right Side Actions */}
+        <div className="navbar-actions">
+          {/* Messages */}
+          <button className="navbar-action-btn">
+            <MessageSquare className="h-5 w-5" />
+            <span className="navbar-badge">3</span>
+          </button>
+
+          {/* Notifications */}
+          <div className="relative">
+            <button
+              onClick={() => setShowNotifications(!showNotifications)}
+              className="navbar-action-btn"
+            >
+              <Bell className="h-5 w-5" />
+              {unreadCount > 0 && (
+                <span className="navbar-badge">{unreadCount}</span>
+              )}
+            </button>
+
+            {/* Notifications Dropdown */}
+            {showNotifications && (
+              <div className="notifications-dropdown">
+                <div className="notifications-header">
+                  <h3 className="notifications-title">Notifications</h3>
+                  <button className="notifications-mark-read">Mark all read</button>
+                </div>
+                <div className="notifications-list">
+                  {notifications.map((notification) => (
+                    <div
+                      key={notification.id}
+                      className={`notification-item ${notification.unread ? 'unread' : ''}`}
+                    >
+                      <div className="notification-content">
+                        <p className="notification-title">{notification.title}</p>
+                        <p className="notification-time">{notification.time}</p>
+                      </div>
+                      {notification.unread && <div className="notification-dot"></div>}
+                    </div>
+                  ))}
+                </div>
+                <div className="notifications-footer">
+                  <button className="notifications-view-all">View all notifications</button>
+                </div>
+              </div>
+            )}
           </div>
 
-          <div className="flex items-center space-x-4">
-            {getRoleNavItems().map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors"
-              >
-                <item.icon className="h-4 w-4" />
-                <span>{item.label}</span>
-              </Link>
-            ))}
-            
-            <div className="flex items-center space-x-3 border-l border-gray-200 pl-4">
-              <div className="text-sm">
-                <p className="font-medium text-gray-900">{user?.name}</p>
-                <p className="text-gray-500 capitalize">{user?.role.replace('_', ' ')}</p>
-                {school && <p className="text-xs text-gray-400">{school.name}</p>}
+          {/* Settings */}
+          <button className="navbar-action-btn">
+            <Settings className="h-5 w-5" />
+          </button>
+
+          {/* User Menu */}
+          <div className="relative">
+            <button
+              onClick={() => setShowUserMenu(!showUserMenu)}
+              className="navbar-user-btn"
+            >
+              <div className="user-avatar">
+                <User className="h-5 w-5" />
               </div>
-              <button
-                onClick={handleLogout}
-                className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 transition-colors"
-              >
-                <LogOut className="h-4 w-4" />
-                <span>Logout</span>
-              </button>
-            </div>
+              <div className="user-info">
+                <span className="user-name">{user?.name}</span>
+                <span className="user-role">{user?.role.replace('_', ' ')}</span>
+              </div>
+              <ChevronDown className="h-4 w-4 text-gray-400" />
+            </button>
+
+            {/* User Dropdown */}
+            {showUserMenu && (
+              <div className="user-dropdown">
+                <div className="user-dropdown-header">
+                  <div className="user-avatar-large">
+                    <User className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="user-dropdown-name">{user?.name}</p>
+                    <p className="user-dropdown-email">{user?.email}</p>
+                    {school && (
+                      <p className="user-dropdown-school">{school.name}</p>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="user-dropdown-divider"></div>
+                
+                <div className="user-dropdown-menu">
+                  <button className="user-dropdown-item">
+                    <User className="h-4 w-4" />
+                    <span>Profile Settings</span>
+                  </button>
+                  <button className="user-dropdown-item">
+                    <Settings className="h-4 w-4" />
+                    <span>Account Settings</span>
+                  </button>
+                </div>
+                
+                <div className="user-dropdown-divider"></div>
+                
+                <button
+                  onClick={handleLogout}
+                  className="user-dropdown-logout"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {showMobileMenu && (
+        <div className="mobile-menu-overlay lg:hidden">
+          <div className="mobile-search">
+            <form onSubmit={handleSearch}>
+              <div className="search-input-container">
+                <Search className="search-icon" />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-input"
+                />
+              </div>
+            </form>
+          </div>
+          
+          <div className="mobile-actions">
+            <button className="mobile-action-item">
+              <MessageSquare className="h-5 w-5" />
+              <span>Messages</span>
+              <span className="navbar-badge">3</span>
+            </button>
+            <button className="mobile-action-item">
+              <Bell className="h-5 w-5" />
+              <span>Notifications</span>
+              {unreadCount > 0 && <span className="navbar-badge">{unreadCount}</span>}
+            </button>
+            <button className="mobile-action-item">
+              <Settings className="h-5 w-5" />
+              <span>Settings</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Click outside handlers */}
+      {(showUserMenu || showNotifications) && (
+        <div
+          className="fixed inset-0 z-10"
+          onClick={() => {
+            setShowUserMenu(false);
+            setShowNotifications(false);
+          }}
+        />
+      )}
     </nav>
   );
 };

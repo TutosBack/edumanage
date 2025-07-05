@@ -11,7 +11,8 @@ import {
   Menu,
   X,
   LogOut,
-  UserCog
+  UserCog,
+  Building2
 } from 'lucide-react';
 
 const Sidebar: React.FC = () => {
@@ -33,7 +34,7 @@ const Sidebar: React.FC = () => {
     switch (user.role) {
       case 'super_admin':
         items.push(
-          { to: '/schools', label: 'Schools', icon: GraduationCap },
+          { to: '/schools', label: 'Schools', icon: Building2 },
           { to: '/admin/create-school', label: 'Create School', icon: Settings }
         );
         break;
@@ -85,23 +86,23 @@ const Sidebar: React.FC = () => {
 
       {/* Sidebar */}
       <div className={`
-        fixed top-16 left-0 h-[calc(100vh-4rem)] bg-white shadow-lg z-40 transition-transform duration-300 ease-in-out
+        fixed top-16 left-0 h-[calc(100vh-4rem)] dashboard-sidebar z-40 transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:fixed lg:z-auto
         w-64 border-r border-gray-200 overflow-hidden
       `}>
         <div className="flex flex-col h-full overflow-hidden">
           {/* Navigation */}
-          <nav className="flex-1 p-3 space-y-1 pt-4 overflow-y-auto">
+          <nav className="flex-1 p-3 space-y-1 pt-4 overflow-y-auto custom-scrollbar">
             {getRoleNavItems().map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={() => setIsOpen(false)}
                 className={`
-                  flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                  nav-link flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors
                   ${isActive(item.to) 
-                    ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600' 
-                    : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                    ? 'nav-link-active' 
+                    : 'text-gray-700 hover:text-gray-900'
                   }
                 `}
               >
