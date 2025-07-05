@@ -7,6 +7,7 @@ export interface User {
   role: 'super_admin' | 'school_admin' | 'teacher' | 'student';
   school_ids?: number[];
   current_school_id?: number;
+  class_ids?: number[];
 }
 
 export interface School {
@@ -16,12 +17,21 @@ export interface School {
   created_at: string;
 }
 
+export interface Class {
+  id: number;
+  name: string;
+  school_id: number;
+  grade_level: string;
+  created_at: string;
+}
+
 export interface Course {
   id: number;
   name: string;
   description: string;
   school_id: number;
   teacher_id?: number;
+  class_ids?: number[];
   created_at: string;
 }
 

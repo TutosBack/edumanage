@@ -10,7 +10,8 @@ import {
   Settings, 
   Menu,
   X,
-  LogOut
+  LogOut,
+  UserCog
 } from 'lucide-react';
 
 const Sidebar: React.FC = () => {
@@ -39,7 +40,8 @@ const Sidebar: React.FC = () => {
       case 'school_admin':
         items.push(
           { to: '/courses', label: 'Courses', icon: Book },
-          { to: '/admin/create-user', label: 'Manage Users', icon: Users }
+          { to: '/admin/manage-users', label: 'Manage Users', icon: UserCog },
+          { to: '/admin/create-user', label: 'Add User', icon: Users }
         );
         break;
       case 'teacher':
@@ -125,4 +127,4 @@ const Sidebar: React.FC = () => {
   );
 };
 
-export default Sidebar; 
+export default Sidebar;

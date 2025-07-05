@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, Home, Book, Upload, Users, GraduationCap, Settings } from 'lucide-react';
+import { LogOut, Home, Book, Upload, Users, GraduationCap, Settings, UserCog } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const { user, school, logout } = useAuth();
@@ -29,7 +29,8 @@ const Navbar: React.FC = () => {
       case 'school_admin':
         items.push(
           { to: '/courses', label: 'Courses', icon: Book },
-          { to: '/admin/create-user', label: 'Manage Users', icon: Users }
+          { to: '/admin/manage-users', label: 'Manage Users', icon: UserCog },
+          { to: '/admin/create-user', label: 'Add User', icon: Users }
         );
         break;
       case 'teacher':

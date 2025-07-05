@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { courses, users, materials } from '../../data/mockData';
-import { Book, Users, FileText, Plus } from 'lucide-react';
+import { courses, users, materials, classes } from '../../data/mockData';
+import { Book, Users, FileText, Plus, GraduationCap, UserCheck } from 'lucide-react';
 
 const SchoolAdminDashboard: React.FC = () => {
   const { user, school } = useAuth();
   
   const schoolCourses = courses.filter(course => course.school_id === user?.current_school_id);
   const schoolUsers = users.filter(u => u.school_ids?.includes(user?.current_school_id || 0));
+  const schoolClasses = classes.filter(c => c.school_id === user?.current_school_id);
   const schoolMaterials = materials.filter(material => 
     schoolCourses.some(course => course.id === material.course_id)
   );
@@ -24,7 +25,7 @@ const SchoolAdminDashboard: React.FC = () => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between">
             <div>
@@ -41,7 +42,7 @@ const SchoolAdminDashboard: React.FC = () => {
               <p className="text-sm font-medium text-gray-600">Teachers</p>
               <p className="text-3xl font-bold text-green-600">{teachers.length}</p>
             </div>
-            <Users className="h-12 w-12 text-green-600" />
+            <UserCheck className="h-12 w-12 text-green-600" />
           </div>
         </div>
 
@@ -51,7 +52,17 @@ const SchoolAdminDashboard: React.FC = () => {
               <p className="text-sm font-medium text-gray-600">Students</p>
               <p className="text-3xl font-bold text-purple-600">{students.length}</p>
             </div>
-            <Users className="h-12 w-12 text-purple-600" />
+            <GraduationCap className="h-12 w-12 text-purple-600" />
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">Classes</p>
+              <p className="text-3xl font-bold text-indigo-600">{schoolClasses.length}</p>
+            </div>
+            <Users className="h-12 w-12 text-indigo-600" />
           </div>
         </div>
 
@@ -77,6 +88,13 @@ const SchoolAdminDashboard: React.FC = () => {
             >
               <Plus className="h-5 w-5 text-gray-500 mr-3" />
               <span className="text-gray-700">Add Teacher/Student</span>
+            </Link>
+            <Link
+              to="/admin/manage-users"
+              className="flex items-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              <Users className="h-5 w-5 text-gray-500 mr-3" />
+              <span className="text-gray-700">Manage Users</span>
             </Link>
             <Link
               to="/courses"
@@ -119,10 +137,20 @@ const SchoolAdminDashboard: React.FC = () => {
                 <div>
                   <h3 className="text-lg font-medium text-gray-900">{course.name}</h3>
                   <p className="text-sm text-gray-500">{course.description}</p>
+                  <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
+                    <span>Classes: {course.class_ids?.length || 0}</span>
+                    <span>Materials: {materials.filter(m => m.course_id === course.id).length}</span>
+                  </div>
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-500">Created</p>
                   <p className="text-sm font-medium text-gray-900">{course.created_at}</p>
+                  <Link
+                    to={`/courses/${course.id}`}
+                    className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                  >
+                    View Details
+                  </Link>
                 </div>
               </div>
             </div>

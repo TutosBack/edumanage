@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { schools, users } from '../data/mockData';
-import { Building2, Users, Calendar, Plus } from 'lucide-react';
+import { Building2, Users, Calendar, Plus, Eye } from 'lucide-react';
 
 const Schools: React.FC = () => {
   const { user } = useAuth();
 
   const getSchoolStats = (schoolId: number) => {
-    const schoolUsers = users.filter(u => u.school_id === schoolId);
+    const schoolUsers = users.filter(u => u.school_ids?.includes(schoolId));
     const teachers = schoolUsers.filter(u => u.role === 'teacher').length;
     const students = schoolUsers.filter(u => u.role === 'student').length;
     
@@ -81,14 +81,20 @@ const Schools: React.FC = () => {
                 </div>
                 
                 <div className="flex items-center justify-between">
-                  <button className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors">
-                    <Users className="h-4 w-4 mr-1" />
-                    View Users
-                  </button>
+                  <Link
+                    to={`/schools/${school.id}`}
+                    className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                  >
+                    <Eye className="h-4 w-4 mr-1" />
+                    View Details
+                  </Link>
                   
-                  <button className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors">
+                  <Link
+                    to={`/schools/${school.id}`}
+                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+                  >
                     Manage
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
