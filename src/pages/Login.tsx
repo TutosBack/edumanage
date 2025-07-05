@@ -117,7 +117,7 @@ const Login: React.FC = () => {
             <div className="flex justify-center mb-4">
               <GraduationCap className="h-16 w-16 text-blue-600" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">EduManage</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Educate</h1>
             <p className="text-gray-600">School Learning Management System</p>
           </div>
 
@@ -227,7 +227,7 @@ const Login: React.FC = () => {
             </form>
           )}
 
-          <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+          {/* <div className="mt-8 p-4 bg-gray-50 rounded-lg">
             <p className="text-sm text-gray-600 text-center mb-3 font-medium">Demo Accounts</p>
             <div className="space-y-2 text-xs text-gray-500">
               <div><strong>Super Admin:</strong> edmond / admin123</div>
@@ -235,7 +235,7 @@ const Login: React.FC = () => {
               <div><strong>Teacher:</strong> michael.j / teacher123</div>
               <div><strong>Student:</strong> david.b / student123</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

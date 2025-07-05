@@ -1,1 +1,1 @@
-edumanage
+educate
