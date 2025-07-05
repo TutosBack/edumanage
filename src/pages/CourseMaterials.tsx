@@ -31,6 +31,32 @@ const CourseMaterials: React.FC = () => {
     );
   }
 
+  // Check if student is enrolled in this course
+  const isStudentEnrolled = user?.role === 'student' && 
+    user.class_ids?.some(classId => course.class_ids?.includes(classId));
+
+  // Students can only access materials if they're enrolled
+  if (user?.role === 'student' && !isStudentEnrolled) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-8">
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+          <div className="flex items-center">
+            <Book className="h-5 w-5 text-yellow-500 mr-2" />
+            <span className="text-yellow-700">You are not enrolled in this course.</span>
+          </div>
+          <div className="mt-4">
+            <Link
+              to="/courses"
+              className="text-yellow-600 hover:text-yellow-700 font-medium"
+            >
+              Browse available courses →
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const teacher = users.find(u => u.id === course.teacher_id);
 
   const getFileIcon = (fileType: string) => {
@@ -47,6 +73,10 @@ const CourseMaterials: React.FC = () => {
   };
 
   const getUploaderName = (uploaderId: number) => {
+    // Students don't need to see who uploaded materials
+    if (user?.role === 'student') {
+      return 'Teacher';
+    }
     const uploader = users.find(u => u.id === uploaderId);
     return uploader?.name || 'Unknown';
   };
@@ -76,12 +106,8 @@ const CourseMaterials: React.FC = () => {
                   <span>Teacher: {teacher?.name || 'Not assigned'}</span>
                 </div>
                 <div className="flex items-center">
-                  <Calendar className="h-4 w-4 mr-1" />
-                  <span>Created: {course.created_at}</span>
-                </div>
-                <div className="flex items-center">
                   <FileText className="h-4 w-4 mr-1" />
-                  <span>{courseMaterials.length} materials</span>
+                  <span>{courseMaterials.length} materials available</span>
                 </div>
               </div>
             </div>
@@ -95,7 +121,9 @@ const CourseMaterials: React.FC = () => {
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-lg font-semibold text-gray-900">Course Materials</h2>
           <p className="text-sm text-gray-600 mt-1">
-            Download and view materials for this course
+            {user?.role === 'student' 
+              ? 'Download and view materials for your studies'
+              : 'Materials available for this course'}
           </p>
         </div>
         
@@ -150,33 +178,52 @@ const CourseMaterials: React.FC = () => {
             <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">No materials available</h3>
             <p className="text-gray-600">
-              Materials will appear here when the teacher uploads them.
+              {user?.role === 'student' 
+                ? 'Your teacher hasn\'t uploaded any materials yet. Check back later!'
+                : 'Materials will appear here when the teacher uploads them.'}
             </p>
           </div>
         )}
       </div>
 
-      {/* Quick Actions */}
-      <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-blue-900 mb-2">Need Help?</h3>
-        <p className="text-blue-700 mb-4">
-          If you're having trouble accessing materials or need additional resources, contact your teacher.
-        </p>
-        <div className="flex items-center space-x-4">
-          <Link
-            to={`/courses/${course.id}`}
-            className="inline-flex items-center px-4 py-2 border border-blue-300 text-sm font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors"
-          >
-            View Course Details
-          </Link>
-          <Link
-            to="/courses"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
-          >
-            Browse Other Courses
-          </Link>
+      {/* Student-specific help section */}
+      {user?.role === 'student' && (
+        <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-blue-900 mb-2">Study Tips</h3>
+          <div className="text-blue-700 space-y-2">
+            <p>• Download materials to study offline</p>
+            <p>• Review materials regularly for better understanding</p>
+            <p>• Contact your teacher if you need clarification on any material</p>
+            <p>• Keep your downloaded files organized by subject and date</p>
+          </div>
+          <div className="mt-4 pt-4 border-t border-blue-200">
+            <p className="text-sm text-blue-600">
+              <strong>Need help?</strong> Contact {teacher?.name} at {teacher?.email}
+            </p>
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Quick Actions for non-students */}
+      {user?.role !== 'student' && (
+        <div className="mt-8 bg-gray-50 border border-gray-200 rounded-lg p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Course Management</h3>
+          <div className="flex items-center space-x-4">
+            <Link
+              to={`/courses/${course.id}`}
+              className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+            >
+              View Course Details
+            </Link>
+            <Link
+              to="/courses"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+            >
+              Browse Other Courses
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -14,6 +14,14 @@ const Courses: React.FC = () => {
     if (user?.role === 'teacher') {
       return courses.filter(course => course.teacher_id === user.id);
     }
+    if (user?.role === 'student') {
+      // Students only see courses from their classes
+      return courses.filter(course => 
+        course.school_id === user.current_school_id &&
+        course.class_ids?.some(classId => user.class_ids?.includes(classId))
+      );
+    }
+    // School admin sees all courses in their school
     return courses.filter(course => course.school_id === user?.current_school_id);
   };
 
@@ -29,63 +37,81 @@ const Courses: React.FC = () => {
     return materials.filter(m => m.course_id === courseId).length;
   };
 
+  const getEnrolledStudentCount = (course: any) => {
+    // Students don't need to see enrollment numbers
+    if (user?.role === 'student') return null;
+    
+    return users.filter(u => 
+      u.role === 'student' && 
+      u.class_ids?.some(classId => course.class_ids?.includes(classId))
+    ).length;
+  };
+
   return (
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Courses</h1>
         <p className="text-gray-600 mt-2">
-          {user?.role === 'teacher' ? 'Your courses' : 'Available courses'}
+          {user?.role === 'teacher' ? 'Your courses' : 
+           user?.role === 'student' ? 'Your enrolled courses' : 
+           'Available courses'}
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredCourses.map((course) => (
-          <div key={course.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <Book className="h-8 w-8 text-blue-600" />
-                <span className="text-sm text-gray-500">
-                  {getMaterialCount(course.id)} materials
-                </span>
-              </div>
-              
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {course.name}
-              </h3>
-              
-              <p className="text-gray-600 mb-4">
-                {course.description}
-              </p>
-              
-              <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                <div className="flex items-center">
-                  <User className="h-4 w-4 mr-1" />
-                  <span>{getTeacherName(course.teacher_id)}</span>
+        {filteredCourses.map((course) => {
+          const studentCount = getEnrolledStudentCount(course);
+          
+          return (
+            <div key={course.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <Book className="h-8 w-8 text-blue-600" />
+                  <span className="text-sm text-gray-500">
+                    {getMaterialCount(course.id)} materials
+                  </span>
                 </div>
-                <span>{course.created_at}</span>
-              </div>
-              
-              <div className="flex items-center justify-between">
-                <Link
-                  to={`/courses/${course.id}`}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
-                >
-                  View Details
-                </Link>
                 
-                {user?.role === 'student' && (
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {course.name}
+                </h3>
+                
+                <p className="text-gray-600 mb-4 line-clamp-3">
+                  {course.description}
+                </p>
+                
+                <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                  <div className="flex items-center">
+                    <User className="h-4 w-4 mr-1" />
+                    <span>{getTeacherName(course.teacher_id)}</span>
+                  </div>
+                  {studentCount !== null && (
+                    <span>{studentCount} students</span>
+                  )}
+                </div>
+                
+                <div className="flex items-center justify-between">
                   <Link
-                    to={`/courses/${course.id}/materials`}
-                    className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                    to={`/courses/${course.id}`}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
                   >
-                    <FileText className="h-4 w-4 mr-2" />
-                    Materials
+                    View Details
                   </Link>
-                )}
+                  
+                  {user?.role === 'student' && (
+                    <Link
+                      to={`/courses/${course.id}/materials`}
+                      className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                    >
+                      <FileText className="h-4 w-4 mr-2" />
+                      Materials
+                    </Link>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {filteredCourses.length === 0 && (
@@ -95,6 +121,8 @@ const Courses: React.FC = () => {
           <p className="text-gray-600">
             {user?.role === 'teacher' 
               ? 'You haven\'t been assigned any courses yet.' 
+              : user?.role === 'student'
+              ? 'You are not enrolled in any courses yet. Contact your school administrator.'
               : 'No courses are available for your school.'}
           </p>
         </div>

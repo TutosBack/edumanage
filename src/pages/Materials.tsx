@@ -13,7 +13,17 @@ const Materials: React.FC = () => {
     if (user?.role === 'teacher') {
       return materials.filter(material => material.uploaded_by === user.id);
     }
-    // For students and school admins, show materials from their school
+    if (user?.role === 'student') {
+      // Students only see materials from courses they're enrolled in
+      const enrolledCourses = courses.filter(course => 
+        course.school_id === user.current_school_id &&
+        course.class_ids?.some(classId => user.class_ids?.includes(classId))
+      );
+      return materials.filter(material => 
+        enrolledCourses.some(course => course.id === material.course_id)
+      );
+    }
+    // School admin sees all materials from their school
     const schoolCourses = courses.filter(course => course.school_id === user?.current_school_id);
     return materials.filter(material => 
       schoolCourses.some(course => course.id === material.course_id)
@@ -28,6 +38,10 @@ const Materials: React.FC = () => {
   };
 
   const getUploaderName = (uploaderId: number) => {
+    // Students don't need to see detailed uploader info
+    if (user?.role === 'student') {
+      return 'Teacher';
+    }
     const uploader = users.find(u => u.id === uploaderId);
     return uploader?.name || 'Unknown';
   };
@@ -59,7 +73,9 @@ const Materials: React.FC = () => {
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Study Materials</h1>
         <p className="text-gray-600 mt-2">
-          {user?.role === 'teacher' ? 'Materials you\'ve uploaded' : 'Available study materials'}
+          {user?.role === 'teacher' ? 'Materials you\'ve uploaded' : 
+           user?.role === 'student' ? 'Materials for your courses' :
+           'Available study materials'}
         </p>
       </div>
 
@@ -122,6 +138,8 @@ const Materials: React.FC = () => {
           <p className="text-gray-600">
             {user?.role === 'teacher' 
               ? 'You haven\'t uploaded any materials yet.' 
+              : user?.role === 'student'
+              ? 'No study materials are available for your courses yet.'
               : 'No study materials are available yet.'}
           </p>
         </div>

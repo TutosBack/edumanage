@@ -35,12 +35,22 @@ const CourseDetails: React.FC = () => {
 
   const teacher = users.find(u => u.id === course.teacher_id);
   const courseMaterials = materials.filter(m => m.course_id === course.id);
+  
+  // Role-based data filtering
   const courseClasses = classes.filter(c => course.class_ids?.includes(c.id));
+  
+  // Students should only see their own class information
+  const visibleClasses = user?.role === 'student' 
+    ? courseClasses.filter(c => user.class_ids?.includes(c.id))
+    : courseClasses;
   
   const enrolledStudents = users.filter(u => 
     u.role === 'student' && 
     u.class_ids?.some(classId => course.class_ids?.includes(classId))
   );
+
+  // Students shouldn't see other students' information
+  const visibleStudents = user?.role === 'student' ? [] : enrolledStudents;
 
   const getFileIcon = (fileType: string) => {
     switch (fileType) {
@@ -57,6 +67,7 @@ const CourseDetails: React.FC = () => {
 
   const canManageCourse = user?.role === 'teacher' && course.teacher_id === user.id;
   const canViewMaterials = user?.role === 'student' || user?.role === 'teacher' || user?.role === 'school_admin';
+  const canViewStudentList = user?.role === 'teacher' || user?.role === 'school_admin' || user?.role === 'super_admin';
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -95,8 +106,10 @@ const CourseDetails: React.FC = () => {
         </div>
       </div>
 
-      {/* Course Info Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      {/* Course Info Cards - Role-based visibility */}
+      <div className={`grid grid-cols-1 gap-6 mb-8 ${
+        user?.role === 'student' ? 'md:grid-cols-2' : 'md:grid-cols-4'
+      }`}>
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between">
             <div>
@@ -110,16 +123,6 @@ const CourseDetails: React.FC = () => {
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Students</p>
-              <p className="text-lg font-semibold text-green-600">{enrolledStudents.length}</p>
-            </div>
-            <GraduationCap className="h-8 w-8 text-green-600" />
-          </div>
-        </div>
-
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <div className="flex items-center justify-between">
-            <div>
               <p className="text-sm font-medium text-gray-600">Materials</p>
               <p className="text-lg font-semibold text-purple-600">{courseMaterials.length}</p>
             </div>
@@ -127,15 +130,30 @@ const CourseDetails: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-600">Created</p>
-              <p className="text-lg font-semibold text-orange-600">{course.created_at}</p>
+        {/* Only show student count and creation date to non-students */}
+        {user?.role !== 'student' && (
+          <>
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-gray-600">Students</p>
+                  <p className="text-lg font-semibold text-green-600">{enrolledStudents.length}</p>
+                </div>
+                <GraduationCap className="h-8 w-8 text-green-600" />
+              </div>
             </div>
-            <Calendar className="h-8 w-8 text-orange-600" />
-          </div>
-        </div>
+
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-gray-600">Created</p>
+                  <p className="text-lg font-semibold text-orange-600">{course.created_at}</p>
+                </div>
+                <Calendar className="h-8 w-8 text-orange-600" />
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -227,41 +245,43 @@ const CourseDetails: React.FC = () => {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          {/* Classes */}
-          <div className="bg-white rounded-lg shadow-md">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">Classes</h3>
-            </div>
-            <div className="p-6">
-              {courseClasses.length > 0 ? (
+          {/* Classes - Students only see their own classes */}
+          {visibleClasses.length > 0 && (
+            <div className="bg-white rounded-lg shadow-md">
+              <div className="px-6 py-4 border-b border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  {user?.role === 'student' ? 'Your Class' : 'Classes'}
+                </h3>
+              </div>
+              <div className="p-6">
                 <div className="space-y-3">
-                  {courseClasses.map((cls) => (
+                  {visibleClasses.map((cls) => (
                     <div key={cls.id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
                       <div>
                         <p className="font-medium text-gray-900">{cls.name}</p>
                         <p className="text-sm text-gray-500">{cls.grade_level}</p>
                       </div>
-                      <span className="text-sm text-gray-500">
-                        {users.filter(u => u.class_ids?.includes(cls.id) && u.role === 'student').length} students
-                      </span>
+                      {user?.role !== 'student' && (
+                        <span className="text-sm text-gray-500">
+                          {users.filter(u => u.class_ids?.includes(cls.id) && u.role === 'student').length} students
+                        </span>
+                      )}
                     </div>
                   ))}
                 </div>
-              ) : (
-                <p className="text-gray-500 text-center">No classes assigned</p>
-              )}
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* Recent Students */}
-          <div className="bg-white rounded-lg shadow-md">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">Enrolled Students</h3>
-            </div>
-            <div className="p-6">
-              {enrolledStudents.length > 0 ? (
+          {/* Students List - Only visible to teachers and admins */}
+          {canViewStudentList && visibleStudents.length > 0 && (
+            <div className="bg-white rounded-lg shadow-md">
+              <div className="px-6 py-4 border-b border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900">Enrolled Students</h3>
+              </div>
+              <div className="p-6">
                 <div className="space-y-3">
-                  {enrolledStudents.slice(0, 5).map((student) => (
+                  {visibleStudents.slice(0, 5).map((student) => (
                     <div key={student.id} className="flex items-center space-x-3">
                       <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
                         <span className="text-xs font-medium text-gray-700">
@@ -274,17 +294,29 @@ const CourseDetails: React.FC = () => {
                       </div>
                     </div>
                   ))}
-                  {enrolledStudents.length > 5 && (
+                  {visibleStudents.length > 5 && (
                     <p className="text-sm text-gray-500 text-center mt-3">
-                      +{enrolledStudents.length - 5} more students
+                      +{visibleStudents.length - 5} more students
                     </p>
                   )}
                 </div>
-              ) : (
-                <p className="text-gray-500 text-center">No students enrolled</p>
-              )}
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* Student-specific help section */}
+          {user?.role === 'student' && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">Need Help?</h3>
+              <p className="text-blue-700 mb-4">
+                If you need help with course materials or have questions, contact your teacher.
+              </p>
+              <div className="text-sm text-blue-600">
+                <p><strong>Teacher:</strong> {teacher?.name}</p>
+                <p><strong>Email:</strong> {teacher?.email}</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
