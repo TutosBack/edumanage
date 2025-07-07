@@ -20,8 +20,7 @@ const SchoolAdminDashboard: React.FC = () => {
   return (
     <div className="container-enhanced py-8 fade-in">
       <div className="mb-8">
-        <h1 className="heading-primary">School Admin Dashboard</h1>
-        <p className="text-muted-enhanced mt-2">Managing {school?.name}</p>
+        <h1 className="heading-primary">{school?.name}</h1>
       </div>
 
       {/* Stats Cards */}

@@ -13,8 +13,7 @@ const TeacherDashboard: React.FC = () => {
   return (
     <div className="container-enhanced py-8 fade-in">
       <div className="mb-8">
-        <h1 className="heading-primary">Teacher Dashboard</h1>
-        <p className="text-muted-enhanced mt-2">Welcome back, {user?.name}!</p>
+        <h1 className="heading-primary">{user?.name}</h1>
       </div>
 
       {/* Stats Cards */}

@@ -11,7 +11,7 @@ const SuperAdminDashboard: React.FC = () => {
   return (
     <div className="container-enhanced py-8 fade-in">
       <div className="mb-8">
-        <h1 className="heading-primary">Super Admin Dashboard</h1>
+        <h1 className="heading-primary">Admin Dashboard</h1>
         <p className="text-muted-enhanced mt-2">Manage all schools and system-wide settings</p>
       </div>
 

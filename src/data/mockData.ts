@@ -3,118 +3,118 @@ import { User, School, Course, Material, Class, Enrollment, BulkStudentData, Bul
 export const schools: School[] = [
   {
     id: 1,
-    name: "Green Hill School",
-    address: "123 Education St, City Center",
+    name: "Kampala Primary School",
+    address: "Plot 123, Kampala Road, Central Division, Kampala",
     created_at: "2024-01-15"
   },
   {
     id: 2,
-    name: "Bright Future Academy",
-    address: "456 Learning Ave, Downtown",
+    name: "Makerere College School",
+    address: "Makerere Hill, Kawempe Division, Kampala",
     created_at: "2024-02-20"
   },
   {
     id: 3,
-    name: "Excellence High School",
-    address: "789 Knowledge Blvd, Uptown",
+    name: "Buddo Junior School",
+    address: "Buddo, Wakiso District, Central Region",
     created_at: "2024-03-10"
   },
   {
     id: 4,
-    name: "Riverside Elementary",
-    address: "234 River Road, Riverside District",
+    name: "Jinja Primary School",
+    address: "Jinja Main Street, Jinja Municipality, Eastern Region",
     created_at: "2023-08-15"
   },
   {
     id: 5,
-    name: "Mountain View Middle School",
-    address: "567 Peak Avenue, Mountain District",
+    name: "Mbale Secondary School",
+    address: "Republic Street, Mbale Municipality, Eastern Region",
     created_at: "2023-09-01"
   },
   {
     id: 6,
-    name: "Central City High",
-    address: "890 Main Street, Central District",
+    name: "Mbarara High School",
+    address: "High Street, Mbarara Municipality, Western Region",
     created_at: "2023-07-20"
   },
   {
     id: 7,
-    name: "Oakwood Primary",
-    address: "345 Oak Tree Lane, Oakwood",
+    name: "Entebbe Junior School",
+    address: "Church Road, Entebbe Municipality, Central Region",
     created_at: "2023-10-05"
   },
   {
     id: 8,
-    name: "Sunrise International School",
-    address: "678 International Blvd, Business District",
+    name: "Nakasero Primary School",
+    address: "Nakasero Hill, Central Division, Kampala",
     created_at: "2024-01-08"
   },
   {
     id: 9,
-    name: "Liberty Charter School",
-    address: "901 Freedom Way, Liberty Heights",
+    name: "Gulu Secondary School",
+    address: "Coronation Road, Gulu Municipality, Northern Region",
     created_at: "2023-11-12"
   },
   {
     id: 10,
-    name: "Westfield Academy",
-    address: "432 West Field Road, Westfield",
+    name: "Masaka College School",
+    address: "Circular Road, Masaka Municipality, Central Region",
     created_at: "2023-12-03"
   }
 ];
 
 export const classes: Class[] = [
-  // Green Hill School (ID: 1)
-  { id: 1, name: "Grade 1A", school_id: 1, grade_level: "Grade 1", created_at: "2024-01-20" },
-  { id: 2, name: "Grade 1B", school_id: 1, grade_level: "Grade 1", created_at: "2024-01-20" },
-  { id: 3, name: "Grade 2A", school_id: 1, grade_level: "Grade 2", created_at: "2024-01-20" },
-  { id: 4, name: "Grade 3A", school_id: 1, grade_level: "Grade 3", created_at: "2024-01-20" },
-  { id: 5, name: "Grade 4A", school_id: 1, grade_level: "Grade 4", created_at: "2024-01-20" },
-  
-  // Bright Future Academy (ID: 2)
-  { id: 6, name: "Form 1 Alpha", school_id: 2, grade_level: "Form 1", created_at: "2024-02-15" },
-  { id: 7, name: "Form 1 Beta", school_id: 2, grade_level: "Form 1", created_at: "2024-02-15" },
-  { id: 8, name: "Form 2 Alpha", school_id: 2, grade_level: "Form 2", created_at: "2024-02-15" },
-  { id: 9, name: "Form 3 Alpha", school_id: 2, grade_level: "Form 3", created_at: "2024-02-15" },
-  { id: 10, name: "Form 4 Alpha", school_id: 2, grade_level: "Form 4", created_at: "2024-02-15" },
-  
-  // Excellence High School (ID: 3)
-  { id: 11, name: "Year 9A", school_id: 3, grade_level: "Year 9", created_at: "2024-03-12" },
-  { id: 12, name: "Year 9B", school_id: 3, grade_level: "Year 9", created_at: "2024-03-12" },
-  { id: 13, name: "Year 10A", school_id: 3, grade_level: "Year 10", created_at: "2024-03-12" },
-  { id: 14, name: "Year 11A", school_id: 3, grade_level: "Year 11", created_at: "2024-03-12" },
-  { id: 15, name: "Year 12A", school_id: 3, grade_level: "Year 12", created_at: "2024-03-12" },
-  
-  // Riverside Elementary (ID: 4)
-  { id: 16, name: "Kindergarten A", school_id: 4, grade_level: "Kindergarten", created_at: "2024-01-10" },
-  { id: 17, name: "Kindergarten B", school_id: 4, grade_level: "Kindergarten", created_at: "2024-01-10" },
-  { id: 18, name: "Grade 1 Eagles", school_id: 4, grade_level: "Grade 1", created_at: "2024-01-10" },
-  { id: 19, name: "Grade 2 Lions", school_id: 4, grade_level: "Grade 2", created_at: "2024-01-10" },
-  
-  // Mountain View Middle School (ID: 5)
-  { id: 20, name: "6th Grade A", school_id: 5, grade_level: "6th Grade", created_at: "2024-02-01" },
-  { id: 21, name: "6th Grade B", school_id: 5, grade_level: "6th Grade", created_at: "2024-02-01" },
-  { id: 22, name: "7th Grade A", school_id: 5, grade_level: "7th Grade", created_at: "2024-02-01" },
-  { id: 23, name: "8th Grade A", school_id: 5, grade_level: "8th Grade", created_at: "2024-02-01" },
+  // Kampala Primary School (ID: 1)
+  { id: 1, name: "Primary 1 Red", school_id: 1, grade_level: "Primary 1", created_at: "2024-01-20" },
+  { id: 2, name: "Primary 1 Blue", school_id: 1, grade_level: "Primary 1", created_at: "2024-01-20" },
+  { id: 3, name: "Primary 2 Green", school_id: 1, grade_level: "Primary 2", created_at: "2024-01-20" },
+  { id: 4, name: "Primary 3 Yellow", school_id: 1, grade_level: "Primary 3", created_at: "2024-01-20" },
+  { id: 5, name: "Primary 4 Orange", school_id: 1, grade_level: "Primary 4", created_at: "2024-01-20" },
+
+  // Makerere College School (ID: 2)
+  { id: 6, name: "Senior 1 Alpha", school_id: 2, grade_level: "Senior 1", created_at: "2024-02-15" },
+  { id: 7, name: "Senior 1 Beta", school_id: 2, grade_level: "Senior 1", created_at: "2024-02-15" },
+  { id: 8, name: "Senior 2 Alpha", school_id: 2, grade_level: "Senior 2", created_at: "2024-02-15" },
+  { id: 9, name: "Senior 3 Alpha", school_id: 2, grade_level: "Senior 3", created_at: "2024-02-15" },
+  { id: 10, name: "Senior 4 Alpha", school_id: 2, grade_level: "Senior 4", created_at: "2024-02-15" },
+
+  // Buddo Junior School (ID: 3)
+  { id: 11, name: "Senior 5 Arts", school_id: 3, grade_level: "Senior 5", created_at: "2024-03-12" },
+  { id: 12, name: "Senior 5 Sciences", school_id: 3, grade_level: "Senior 5", created_at: "2024-03-12" },
+  { id: 13, name: "Senior 6 Arts", school_id: 3, grade_level: "Senior 6", created_at: "2024-03-12" },
+  { id: 14, name: "Senior 6 Sciences", school_id: 3, grade_level: "Senior 6", created_at: "2024-03-12" },
+  { id: 15, name: "Senior 4 Science", school_id: 3, grade_level: "Senior 4", created_at: "2024-03-12" },
+
+  // Jinja Primary School (ID: 4)
+  { id: 16, name: "Baby Class A", school_id: 4, grade_level: "Baby Class", created_at: "2024-01-10" },
+  { id: 17, name: "Baby Class B", school_id: 4, grade_level: "Baby Class", created_at: "2024-01-10" },
+  { id: 18, name: "Primary 1 Eagles", school_id: 4, grade_level: "Primary 1", created_at: "2024-01-10" },
+  { id: 19, name: "Primary 2 Lions", school_id: 4, grade_level: "Primary 2", created_at: "2024-01-10" },
+
+  // Mbale Secondary School (ID: 5)
+  { id: 20, name: "Senior 1 A", school_id: 5, grade_level: "Senior 1", created_at: "2024-02-01" },
+  { id: 21, name: "Senior 1 B", school_id: 5, grade_level: "Senior 1", created_at: "2024-02-01" },
+  { id: 22, name: "Senior 2 A", school_id: 5, grade_level: "Senior 2", created_at: "2024-02-01" },
+  { id: 23, name: "Senior 3 A", school_id: 5, grade_level: "Senior 3", created_at: "2024-02-01" },
 ];
 
 export let users: User[] = [
   // Super Admin
   {
     id: 1,
-    name: "Edmond Rodriguez",
+    name: "Edmond Tutu",
     email: "edmond@system.com",
     username: "edmond",
     password: "admin123",
     role: "super_admin"
   },
-  
+
   // School Admins
   {
     id: 2,
-    name: "Jane Smith",
-    email: "jane@greenhill.edu",
-    username: "jane.smith",
+    name: "Sarah Nalwanga",
+    email: "sarah@kampala.primary.ug",
+    username: "sarah.nalwanga",
     password: "password123",
     role: "school_admin",
     school_ids: [1],
@@ -122,9 +122,9 @@ export let users: User[] = [
   },
   {
     id: 3,
-    name: "Robert Taylor",
-    email: "robert@schools.edu",
-    username: "robert.t",
+    name: "James Kirunda",
+    email: "james@makerere.college.ug",
+    username: "james.k",
     password: "admin789",
     role: "school_admin",
     school_ids: [2, 3],
@@ -132,9 +132,9 @@ export let users: User[] = [
   },
   {
     id: 4,
-    name: "Lisa Anderson",
-    email: "lisa@riverside.edu",
-    username: "lisa.a",
+    name: "Grace Namukasa",
+    email: "grace@jinja.primary.ug",
+    username: "grace.namukasa",
     password: "admin456",
     role: "school_admin",
     school_ids: [4],
@@ -142,21 +142,21 @@ export let users: User[] = [
   },
   {
     id: 5,
-    name: "Mark Williams",
-    email: "mark@mountainview.edu",
-    username: "mark.w",
+    name: "David Wanyama",
+    email: "david@mbale.secondary.ug",
+    username: "david.wanyama",
     password: "admin654",
     role: "school_admin",
     school_ids: [5],
     current_school_id: 5
   },
-  
+
   // Teachers
   {
     id: 10,
-    name: "Michael Johnson",
-    email: "michael@greenhill.edu",
-    username: "michael.j",
+    name: "Mary Nakato",
+    email: "mary@kampala.primary.ug",
+    username: "mary.n",
     password: "teacher123",
     role: "teacher",
     school_ids: [1, 2],
@@ -165,9 +165,9 @@ export let users: User[] = [
   },
   {
     id: 11,
-    name: "Sarah Wilson",
-    email: "sarah@brightfuture.edu",
-    username: "sarah.w",
+    name: "Peter Ssebugwawo",
+    email: "peter@makerere.college.ug",
+    username: "peter.ssebugwawo",
     password: "teacher456",
     role: "teacher",
     school_ids: [2],
@@ -176,9 +176,9 @@ export let users: User[] = [
   },
   {
     id: 12,
-    name: "David Thompson",
-    email: "david@greenhill.edu",
-    username: "david.t",
+    name: "Rebecca Atukunda",
+    email: "rebecca@kampala.primary.ug",
+    username: "rebecca.atukunda",
     password: "teacher789",
     role: "teacher",
     school_ids: [1],
@@ -187,9 +187,9 @@ export let users: User[] = [
   },
   {
     id: 13,
-    name: "Emma Rodriguez",
-    email: "emma@excellence.edu",
-    username: "emma.r",
+    name: "Moses Okello",
+    email: "moses@buddo.junior.ug",
+    username: "moses.okello",
     password: "teacher321",
     role: "teacher",
     school_ids: [3],
@@ -198,9 +198,9 @@ export let users: User[] = [
   },
   {
     id: 14,
-    name: "James Lee",
-    email: "james@riverside.edu",
-    username: "james.l",
+    name: "Agnes Nambi",
+    email: "agnes@jinja.primary.ug",
+    username: "agnes.nambi",
     password: "teacher654",
     role: "teacher",
     school_ids: [4],
@@ -209,22 +209,22 @@ export let users: User[] = [
   },
   {
     id: 15,
-    name: "Mary Johnson",
-    email: "mary@mountainview.edu",
-    username: "mary.j",
+    name: "Francis Lubega",
+    email: "francis@mbale.secondary.ug",
+    username: "francis.lubega",
     password: "teacher987",
     role: "teacher",
     school_ids: [5],
     current_school_id: 5,
     class_ids: [20, 21]
   },
-  
+
   // Students
   {
     id: 31,
-    name: "David Brown",
-    email: "david@greenhill.edu",
-    username: "david.b",
+    name: "John Mukasa",
+    email: "john@kampala.primary.ug",
+    username: "john.m",
     password: "student123",
     role: "student",
     school_ids: [1],
@@ -235,9 +235,9 @@ export let users: User[] = [
   },
   {
     id: 32,
-    name: "Emily Davis",
-    email: "emily@brightfuture.edu",
-    username: "emily.d",
+    name: "Esther Nakimuli",
+    email: "esther@makerere.college.ug",
+    username: "esther.nakimuli",
     password: "student456",
     role: "student",
     school_ids: [2],
@@ -248,9 +248,9 @@ export let users: User[] = [
   },
   {
     id: 33,
-    name: "Alex Johnson",
-    email: "alex@greenhill.edu",
-    username: "alex.j",
+    name: "Andrew Kato",
+    email: "andrew@kampala.primary.ug",
+    username: "andrew.kato",
     password: "student789",
     role: "student",
     school_ids: [1],
@@ -261,9 +261,9 @@ export let users: User[] = [
   },
   {
     id: 34,
-    name: "Sophia Martinez",
-    email: "sophia@brightfuture.edu",
-    username: "sophia.m",
+    name: "Patricia Namutebi",
+    email: "patricia@makerere.college.ug",
+    username: "patricia.namutebi",
     password: "student321",
     role: "student",
     school_ids: [2],
@@ -274,9 +274,9 @@ export let users: User[] = [
   },
   {
     id: 35,
-    name: "Ethan Wilson",
-    email: "ethan@excellence.edu",
-    username: "ethan.w",
+    name: "Samuel Obwoya",
+    email: "samuel@buddo.junior.ug",
+    username: "samuel.obwoya",
     password: "student654",
     role: "student",
     school_ids: [3],
@@ -287,9 +287,9 @@ export let users: User[] = [
   },
   {
     id: 36,
-    name: "Isabella Garcia",
-    email: "isabella@riverside.edu",
-    username: "isabella.g",
+    name: "Charity Akello",
+    email: "charity@jinja.primary.ug",
+    username: "charity.akello",
     password: "student987",
     role: "student",
     school_ids: [4],
@@ -300,9 +300,9 @@ export let users: User[] = [
   },
   {
     id: 37,
-    name: "Mason Anderson",
-    email: "mason@mountainview.edu",
-    username: "mason.a",
+    name: "Michael Tusiime",
+    email: "michael@mbale.secondary.ug",
+    username: "michael.tusiime",
     password: "student147",
     role: "student",
     school_ids: [5],
@@ -313,9 +313,9 @@ export let users: User[] = [
   },
   {
     id: 38,
-    name: "Olivia Taylor",
-    email: "olivia@greenhill.edu",
-    username: "olivia.t",
+    name: "Joan Namugga",
+    email: "joan@kampala.primary.ug",
+    username: "joan.namugga",
     password: "student258",
     role: "student",
     school_ids: [1],
@@ -326,9 +326,9 @@ export let users: User[] = [
   },
   {
     id: 39,
-    name: "Jacob Thomas",
-    email: "jacob@brightfuture.edu",
-    username: "jacob.t",
+    name: "Simon Nsubuga",
+    email: "simon@makerere.college.ug",
+    username: "simon.nsubuga",
     password: "student369",
     role: "student",
     school_ids: [2],
@@ -339,9 +339,9 @@ export let users: User[] = [
   },
   {
     id: 40,
-    name: "Ava Jackson",
-    email: "ava@excellence.edu",
-    username: "ava.j",
+    name: "Immaculate Nakabuye",
+    email: "immaculate@buddo.junior.ug",
+    username: "immaculate.nakabuye",
     password: "student741",
     role: "student",
     school_ids: [3],
@@ -352,9 +352,9 @@ export let users: User[] = [
   },
   {
     id: 41,
-    name: "William White",
-    email: "william.w@riverside.edu",
-    username: "william.w",
+    name: "Joseph Wamala",
+    email: "joseph@jinja.primary.ug",
+    username: "joseph.wamala",
     password: "student852",
     role: "student",
     school_ids: [4],
@@ -365,9 +365,9 @@ export let users: User[] = [
   },
   {
     id: 42,
-    name: "Mia Harris",
-    email: "mia@mountainview.edu",
-    username: "mia.h",
+    name: "Winnie Namukwaya",
+    email: "winnie@mbale.secondary.ug",
+    username: "winnie.namukwaya",
     password: "student963",
     role: "student",
     school_ids: [5],
@@ -378,9 +378,9 @@ export let users: User[] = [
   },
   {
     id: 43,
-    name: "Benjamin Clark",
-    email: "benjamin@greenhill.edu",
-    username: "benjamin.c",
+    name: "Fred Kiprotich",
+    email: "fred@kampala.primary.ug",
+    username: "fred.kiprotich",
     password: "student159",
     role: "student",
     school_ids: [1],
@@ -391,9 +391,9 @@ export let users: User[] = [
   },
   {
     id: 44,
-    name: "Charlotte Lewis",
-    email: "charlotte@brightfuture.edu",
-    username: "charlotte.l",
+    name: "Christine Nalule",
+    email: "christine@makerere.college.ug",
+    username: "christine.nalule",
     password: "student357",
     role: "student",
     school_ids: [2],
@@ -404,9 +404,9 @@ export let users: User[] = [
   },
   {
     id: 45,
-    name: "Lucas Robinson",
-    email: "lucas@excellence.edu",
-    username: "lucas.r",
+    name: "Ronald Byamugisha",
+    email: "ronald@buddo.junior.ug",
+    username: "ronald.byamugisha",
     password: "student468",
     role: "student",
     school_ids: [3],
@@ -418,11 +418,11 @@ export let users: User[] = [
 ];
 
 export let courses: Course[] = [
-  // Green Hill School (ID: 1)
+  // Kampala Primary School (ID: 1)
   {
     id: 1,
-    name: "Mathematics 101",
-    description: "Introduction to basic mathematics concepts including arithmetic, basic algebra, and problem-solving techniques. This course builds foundational skills essential for advanced mathematical studies.",
+    name: "Mathematics",
+    description: "Introduction to numeracy concepts including counting, addition, subtraction, multiplication, and division. Foundation for PLE mathematics preparation.",
     school_id: 1,
     teacher_id: 10,
     class_ids: [1, 2],
@@ -433,8 +433,8 @@ export let courses: Course[] = [
   },
   {
     id: 2,
-    name: "English Literature",
-    description: "Classical and modern literature analysis covering poetry, prose, and drama. Students will develop critical thinking and analytical writing skills through comprehensive study of literary works.",
+    name: "English Language",
+    description: "Reading, writing, speaking, and listening skills development. Grammar, vocabulary, and comprehension for effective communication in English.",
     school_id: 1,
     teacher_id: 10,
     class_ids: [3, 4],
@@ -445,8 +445,8 @@ export let courses: Course[] = [
   },
   {
     id: 3,
-    name: "History of World Civilizations",
-    description: "Comprehensive study of world history from ancient civilizations to modern times. Explores cultural, political, and social developments that shaped human civilization.",
+    name: "Social Studies",
+    description: "Study of Ugandan history, geography, civics, and culture. Understanding of national identity, government structures, and social responsibilities.",
     school_id: 1,
     teacher_id: 12,
     class_ids: [4, 5],
@@ -457,8 +457,8 @@ export let courses: Course[] = [
   },
   {
     id: 4,
-    name: "Physical Science",
-    description: "Introduction to physics and chemistry concepts with hands-on laboratory experiences. Covers matter, energy, motion, and basic chemical reactions.",
+    name: "Integrated Science",
+    description: "Basic science concepts covering plants, animals, human body, and environmental science. Hands-on experiments and observations.",
     school_id: 1,
     teacher_id: 12,
     class_ids: [5],
@@ -467,12 +467,12 @@ export let courses: Course[] = [
     enrolled_students: [43],
     max_students: 20
   },
-  
-  // Bright Future Academy (ID: 2)
+
+  // Makerere College School (ID: 2)
   {
     id: 5,
-    name: "Biology Fundamentals",
-    description: "Basic principles of biology and life sciences including cell structure, genetics, ecology, and human anatomy. Laboratory work enhances theoretical understanding.",
+    name: "Biology",
+    description: "Study of living organisms, cell structure, genetics, ecology, and human biology. Laboratory practicals and field work included.",
     school_id: 2,
     teacher_id: 11,
     class_ids: [6, 7],
@@ -483,8 +483,8 @@ export let courses: Course[] = [
   },
   {
     id: 6,
-    name: "Chemistry Basics",
-    description: "Introduction to chemical principles including atomic structure, chemical bonding, reactions, and stoichiometry. Emphasis on practical applications and safety.",
+    name: "Chemistry",
+    description: "Introduction to chemical principles, atomic structure, chemical bonding, and reactions. Laboratory experiments and safety protocols.",
     school_id: 2,
     teacher_id: 10,
     class_ids: [8, 9],
@@ -496,7 +496,7 @@ export let courses: Course[] = [
   {
     id: 7,
     name: "Advanced Mathematics",
-    description: "Algebra II and Trigonometry covering quadratic functions, exponential and logarithmic functions, and trigonometric identities. Prepares students for calculus.",
+    description: "Algebra, geometry, trigonometry, and calculus basics. Preparation for UACE mathematics and university entrance requirements.",
     school_id: 2,
     teacher_id: 11,
     class_ids: [9, 10],
@@ -505,12 +505,11 @@ export let courses: Course[] = [
     enrolled_students: [34, 44],
     max_students: 26
   },
-  
-  // Excellence High School (ID: 3)
+  // Buddo Junior School (ID: 3)
   {
     id: 8,
-    name: "AP Calculus",
-    description: "Advanced Placement Calculus AB covering limits, derivatives, integrals, and applications. Prepares students for college-level mathematics and AP examination.",
+    name: "Advanced Level Mathematics",
+    description: "Pure mathematics and applied mathematics for UACE. Covers calculus, statistics, and mechanics for university preparation.",
     school_id: 3,
     teacher_id: 13,
     class_ids: [14, 15],
@@ -521,8 +520,8 @@ export let courses: Course[] = [
   },
   {
     id: 9,
-    name: "World Languages: Spanish",
-    description: "Spanish language and culture study focusing on communication skills, grammar, vocabulary, and cultural understanding of Spanish-speaking countries.",
+    name: "Literature in English",
+    description: "Study of poetry, drama, and prose from African, European, and American authors. Critical analysis and creative writing skills.",
     school_id: 3,
     teacher_id: 13,
     class_ids: [11, 12, 13],
@@ -531,12 +530,12 @@ export let courses: Course[] = [
     enrolled_students: [35, 40],
     max_students: 30
   },
-  
-  // Riverside Elementary (ID: 4)
+
+  // Jinja Primary School (ID: 4)
   {
     id: 10,
-    name: "Elementary Math",
-    description: "Basic arithmetic and problem solving for young learners. Covers counting, addition, subtraction, multiplication, division, and introduction to fractions.",
+    name: "Primary Mathematics",
+    description: "Basic numeracy skills for young learners. Numbers, shapes, measurements, and simple problem solving using local contexts.",
     school_id: 4,
     teacher_id: 14,
     class_ids: [16, 17, 18],
@@ -547,8 +546,8 @@ export let courses: Course[] = [
   },
   {
     id: 11,
-    name: "Reading Comprehension",
-    description: "Developing reading skills and vocabulary through age-appropriate literature. Focus on phonics, sight words, and comprehension strategies.",
+    name: "Luganda Language",
+    description: "Local language instruction in Luganda. Reading, writing, speaking, and cultural appreciation of Buganda traditions.",
     school_id: 4,
     teacher_id: 14,
     class_ids: [18, 19],
@@ -557,12 +556,12 @@ export let courses: Course[] = [
     enrolled_students: [41],
     max_students: 22
   },
-  
-  // Mountain View Middle School (ID: 5)
+
+  // Mbale Secondary School (ID: 5)
   {
     id: 12,
-    name: "Pre-Algebra",
-    description: "Preparation for high school algebra covering integers, rational numbers, basic equations, and introduction to algebraic thinking.",
+    name: "Ordinary Level Mathematics",
+    description: "Comprehensive mathematics covering algebra, geometry, trigonometry, and statistics. Preparation for UCE examination.",
     school_id: 5,
     teacher_id: 15,
     class_ids: [22, 23],
@@ -573,8 +572,8 @@ export let courses: Course[] = [
   },
   {
     id: 13,
-    name: "Earth Science",
-    description: "Geology, meteorology, and environmental science. Students explore Earth's systems, weather patterns, and environmental challenges.",
+    name: "Geography",
+    description: "Physical and human geography of Uganda, East Africa, and the world. Map reading, climate, population, and economic activities.",
     school_id: 5,
     teacher_id: 15,
     class_ids: [20, 21],
@@ -586,174 +585,175 @@ export let courses: Course[] = [
 ];
 
 export const materials: Material[] = [
-  // Materials for Green Hill School courses
+  // Materials for Kampala Primary School courses
   {
     id: 1,
-    title: "Algebra Fundamentals",
-    description: "Complete guide to algebraic expressions and basic equation solving techniques",
+    title: "Primary Mathematics Workbook",
+    description: "Complete guide to primary mathematics with local examples and PLE preparation exercises",
     file_type: "pdf",
-    file_url: "/materials/algebra.pdf",
+    file_url: "/materials/primary-math-workbook.pdf",
     course_id: 1,
     uploaded_by: 10,
     created_at: "2024-01-25"
   },
   {
     id: 2,
-    title: "Quadratic Equations Workbook",
-    description: "Practice problems for quadratic equations with step-by-step solutions",
+    title: "Number Games and Activities",
+    description: "Fun mathematical activities using Ugandan coins, fruits, and everyday objects",
     file_type: "pdf",
-    file_url: "/materials/quadratic-workbook.pdf",
+    file_url: "/materials/number-games.pdf",
     course_id: 1,
     uploaded_by: 10,
     created_at: "2024-02-01"
   },
   {
     id: 3,
-    title: "Mathematics Video Lecture Series",
-    description: "Comprehensive video tutorials covering all mathematics fundamentals",
+    title: "Mathematics Teaching Videos",
+    description: "Video lessons in English and Luganda for primary mathematics concepts",
     file_type: "video",
-    file_url: "/materials/math-lectures.mp4",
+    file_url: "/materials/math-videos.mp4",
     course_id: 1,
     uploaded_by: 10,
     created_at: "2024-02-05"
   },
   {
     id: 4,
-    title: "Shakespeare Analysis",
-    description: "Study guide for Hamlet with character analysis and themes",
+    title: "English Grammar Guide",
+    description: "Comprehensive English grammar with Ugandan context examples and exercises",
     file_type: "document",
-    file_url: "/materials/hamlet-analysis.docx",
+    file_url: "/materials/english-grammar.docx",
     course_id: 2,
     uploaded_by: 10,
     created_at: "2024-03-05"
   },
   {
     id: 5,
-    title: "Poetry Interpretation Guide",
-    description: "Understanding metaphors, symbolism, and literary devices in poetry",
+    title: "Reading Comprehension Passages",
+    description: "Reading passages about Ugandan culture, history, and daily life for comprehension practice",
     file_type: "pdf",
-    file_url: "/materials/poetry-guide.pdf",
+    file_url: "/materials/reading-passages.pdf",
     course_id: 2,
     uploaded_by: 10,
     created_at: "2024-03-10"
   },
   {
     id: 6,
-    title: "Ancient Civilizations Timeline",
-    description: "Interactive timeline of major civilizations and their contributions",
+    title: "History of Uganda",
+    description: "Comprehensive guide to Ugandan history from pre-colonial times to independence",
     file_type: "pdf",
-    file_url: "/materials/ancient-timeline.pdf",
+    file_url: "/materials/uganda-history.pdf",
     course_id: 3,
     uploaded_by: 12,
     created_at: "2024-02-01"
   },
   {
     id: 7,
-    title: "World War II Documentary",
-    description: "Educational video on WWII events and their global impact",
+    title: "Uganda's Independence Documentary",
+    description: "Educational video about Uganda's journey to independence and key historical figures",
     file_type: "video",
-    file_url: "/materials/wwii-documentary.mp4",
+    file_url: "/materials/independence-documentary.mp4",
     course_id: 3,
     uploaded_by: 12,
     created_at: "2024-02-15"
   },
   {
     id: 8,
-    title: "Physics Lab Manual",
-    description: "Laboratory experiments and procedures for physical science",
+    title: "Science Experiments Manual",
+    description: "Simple science experiments using locally available materials and resources",
     file_type: "pdf",
-    file_url: "/materials/physics-lab.pdf",
+    file_url: "/materials/science-experiments.pdf",
     course_id: 4,
     uploaded_by: 12,
     created_at: "2024-02-20"
   },
-  
-  // Materials for Bright Future Academy courses
+
+  // Materials for Makerere College School courses
   {
     id: 9,
-    title: "Cell Structure Diagrams",
-    description: "Detailed diagrams of plant and animal cells with labeled components",
+    title: "Biology Diagrams and Charts",
+    description: "Detailed biological diagrams with labels in English and local language explanations",
     file_type: "pdf",
-    file_url: "/materials/cell-structure.pdf",
+    file_url: "/materials/biology-diagrams.pdf",
     course_id: 5,
     uploaded_by: 11,
     created_at: "2024-02-20"
   },
   {
     id: 10,
-    title: "Genetics Video Series",
-    description: "Video explanations of DNA, RNA, and inheritance patterns",
+    title: "Biology Practical Videos",
+    description: "Laboratory practical demonstrations for UCE biology syllabus",
     file_type: "video",
-    file_url: "/materials/genetics-videos.mp4",
+    file_url: "/materials/biology-practicals.mp4",
     course_id: 5,
     uploaded_by: 11,
     created_at: "2024-02-25"
   },
   {
     id: 11,
-    title: "Chemical Reactions Workbook",
-    description: "Practice problems for balancing equations and reaction types",
+    title: "Chemistry Equations Workbook",
+    description: "Chemical equations and reactions workbook with step-by-step solutions",
     file_type: "pdf",
-    file_url: "/materials/chemistry-workbook.pdf",
+    file_url: "/materials/chemistry-equations.pdf",
     course_id: 6,
     uploaded_by: 10,
     created_at: "2024-03-20"
   },
   {
     id: 12,
-    title: "Trigonometry Reference Sheet",
-    description: "Essential trigonometric identities and formulas",
+    title: "Mathematics Formula Sheet",
+    description: "Essential mathematical formulas and identities for secondary school mathematics",
     file_type: "pdf",
-    file_url: "/materials/trig-reference.pdf",
+    file_url: "/materials/math-formulas.pdf",
     course_id: 7,
     uploaded_by: 11,
     created_at: "2024-03-01"
   },
-  
-  // Materials for Excellence High School courses
+
+  // Materials for Buddo Junior School courses
   {
     id: 13,
-    title: "Calculus Problem Sets",
-    description: "Advanced calculus problems with detailed solutions",
+    title: "Advanced Mathematics Past Papers",
+    description: "UACE mathematics past papers with detailed solutions and marking schemes",
     file_type: "pdf",
-    file_url: "/materials/calculus-problems.pdf",
+    file_url: "/materials/uace-math-papers.pdf",
     course_id: 8,
     uploaded_by: 13,
     created_at: "2024-03-15"
   },
   {
     id: 14,
-    title: "Spanish Conversation Practice",
-    description: "Audio files for Spanish pronunciation and conversation practice",
-    file_type: "video",
-    file_url: "/materials/spanish-conversation.mp4",
+    title: "African Literature Collection",
+    description: "Collection of African poetry, novels, and plays for literature studies",
+    file_type: "pdf",
+    file_url: "/materials/african-literature.pdf",
     course_id: 9,
     uploaded_by: 13,
     created_at: "2024-03-20"
   },
-  
-  // Materials for Riverside Elementary courses
+
+  // Materials for Jinja Primary School courses
   {
     id: 15,
-    title: "Counting and Numbers Workbook",
-    description: "Fun exercises for learning numbers and basic counting",
+    title: "Counting with Ugandan Objects",
+    description: "Learning to count using bananas, mangoes, and other familiar Ugandan items",
     file_type: "pdf",
-    file_url: "/materials/counting-workbook.pdf",
+    file_url: "/materials/counting-objects.pdf",
     course_id: 10,
     uploaded_by: 14,
     created_at: "2024-01-15"
   },
   {
     id: 16,
-    title: "Phonics Learning Videos",
-    description: "Interactive videos for learning letter sounds and phonics",
+    title: "Luganda Stories and Songs",
+    description: "Traditional Luganda stories and songs for language learning and cultural appreciation",
     file_type: "video",
-    file_url: "/materials/phonics-videos.mp4",
+    file_url: "/materials/luganda-stories.mp4",
     course_id: 11,
     uploaded_by: 14,
     created_at: "2024-01-20"
   },
-  
+
+
   // Materials for Mountain View Middle School courses
   {
     id: 17,
@@ -845,8 +845,8 @@ export const bulkAdmitStudents = (studentsData: BulkStudentData[], schoolId: num
   studentsData.forEach((studentData, index) => {
     try {
       // Find class by name and school
-      const targetClass = classes.find(c => 
-        c.name.toLowerCase() === studentData.class_name.toLowerCase() && 
+      const targetClass = classes.find(c =>
+        c.name.toLowerCase() === studentData.class_name.toLowerCase() &&
         c.school_id === schoolId
       );
 
@@ -860,7 +860,7 @@ export const bulkAdmitStudents = (studentsData: BulkStudentData[], schoolId: num
       }
 
       // Check for duplicate email or username
-      const existingUser = users.find(u => 
+      const existingUser = users.find(u =>
         u.email === studentData.email || u.username === studentData.username
       );
 
@@ -914,15 +914,15 @@ export const enrollStudentInCourse = (studentId: number, courseId: number, enrol
     }
 
     // Check course capacity
-    if (course.enrolled_students && course.max_students && 
-        course.enrolled_students.length >= course.max_students) {
+    if (course.enrolled_students && course.max_students &&
+      course.enrolled_students.length >= course.max_students) {
       return false;
     }
 
     // Update student enrollment
     if (!student.enrolled_courses) student.enrolled_courses = [];
     if (!student.enrolled_at) student.enrolled_at = {};
-    
+
     student.enrolled_courses.push(courseId);
     student.enrolled_at[courseId] = new Date().toISOString().split('T')[0];
 
@@ -971,7 +971,7 @@ export const unenrollStudentFromCourse = (studentId: number, courseId: number): 
     }
 
     // Update enrollment record
-    const enrollment = enrollments.find(e => 
+    const enrollment = enrollments.find(e =>
       e.student_id === studentId && e.course_id === courseId && e.status === 'active'
     );
     if (enrollment) {

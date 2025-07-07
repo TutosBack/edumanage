@@ -25,8 +25,7 @@ const StudentDashboard: React.FC = () => {
   return (
     <div className="container-enhanced py-8 fade-in">
       <div className="mb-8">
-        <h1 className="heading-primary">Student Dashboard</h1>
-        <p className="text-muted-enhanced mt-2">Welcome back, {user?.name}!</p>
+        <h1 className="heading-primary">{user?.name}</h1>
         {studentClasses.length > 0 && (
           <p className="text-sm text-gray-500 mt-1">
             Classes: {studentClasses.map(cls => cls.name).join(', ')}
