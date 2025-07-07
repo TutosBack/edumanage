@@ -8,6 +8,8 @@ export interface User {
   school_ids?: number[];
   current_school_id?: number;
   class_ids?: number[];
+  status?: 'active' | 'inactive';
+  created_at?: string;
 }
 
 export interface School {
@@ -15,6 +17,8 @@ export interface School {
   name: string;
   address: string;
   created_at: string;
+  status?: 'active' | 'inactive';
+  admin_id?: number;
 }
 
 export interface Class {
@@ -23,6 +27,9 @@ export interface Class {
   school_id: number;
   grade_level: string;
   created_at: string;
+  teacher_id?: number;
+  capacity?: number;
+  description?: string;
 }
 
 export interface Course {
@@ -33,6 +40,8 @@ export interface Course {
   teacher_id?: number;
   class_ids?: number[];
   created_at: string;
+  status?: 'active' | 'inactive';
+  credits?: number;
 }
 
 export interface Material {
@@ -44,6 +53,8 @@ export interface Material {
   course_id: number;
   uploaded_by: number;
   created_at: string;
+  file_size?: string;
+  downloads?: number;
 }
 
 export interface AuthContextType {
