@@ -10,6 +10,8 @@ export interface User {
   class_ids?: number[];
   status?: 'active' | 'inactive';
   created_at?: string;
+  enrolled_courses?: number[];
+  enrolled_at?: Record<number, string>; // courseId -> enrollment date
 }
 
 export interface School {
@@ -42,6 +44,9 @@ export interface Course {
   created_at: string;
   status?: 'active' | 'inactive';
   credits?: number;
+  self_enrollment?: boolean;
+  enrolled_students?: number[];
+  max_students?: number;
 }
 
 export interface Material {
@@ -57,10 +62,42 @@ export interface Material {
   downloads?: number;
 }
 
+export interface Enrollment {
+  id: number;
+  student_id: number;
+  course_id: number;
+  enrolled_by: number; // teacher or student who enrolled
+  enrolled_at: string;
+  status: 'active' | 'dropped' | 'completed';
+}
+
 export interface AuthContextType {
   user: User | null;
   school: School | null;
   login: (user: User, school?: School) => void;
   logout: () => void;
   isAuthenticated: boolean;
+  isTeacher: () => boolean;
+  isSchoolAdmin: () => boolean;
+  isSuperAdmin: () => boolean;
+  isStudent: () => boolean;
+  canEnrollStudents: () => boolean;
+  canAdmitStudents: () => boolean;
+}
+
+export interface BulkStudentData {
+  name: string;
+  email: string;
+  username: string;
+  class_name: string;
+  grade_level?: string;
+}
+
+export interface BulkUploadResult {
+  success: BulkStudentData[];
+  errors: Array<{
+    row: number;
+    data: BulkStudentData;
+    error: string;
+  }>;
 }

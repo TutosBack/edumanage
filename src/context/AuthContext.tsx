@@ -51,12 +51,32 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem('school');
   };
 
+  // Helper functions for role checks
+  const isTeacher = () => user?.role === 'teacher';
+  const isSchoolAdmin = () => user?.role === 'school_admin';
+  const isSuperAdmin = () => user?.role === 'super_admin';
+  const isStudent = () => user?.role === 'student';
+
+  const canEnrollStudents = () => {
+    return isTeacher() || isSchoolAdmin();
+  };
+
+  const canAdmitStudents = () => {
+    return isSchoolAdmin() || isSuperAdmin();
+  };
+
   const value: AuthContextType = {
     user,
     school,
     login,
     logout,
     isAuthenticated: !!user,
+    isTeacher,
+    isSchoolAdmin,
+    isSuperAdmin,
+    isStudent,
+    canEnrollStudents,
+    canAdmitStudents,
   };
 
   return (

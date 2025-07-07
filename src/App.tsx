@@ -15,6 +15,11 @@ import ManageUsers from './pages/ManageUsers';
 import CreateSchool from './pages/CreateSchool';
 import Schools from './pages/Schools';
 import SchoolDetails from './pages/SchoolDetails';
+import AdmitStudent from './pages/AdmitStudent';
+import BulkAdmitStudents from './pages/BulkAdmitStudents';
+import EnrollStudents from './pages/EnrollStudents';
+import MyEnrollments from './pages/MyEnrollments';
+import CourseSettings from './pages/CourseSettings';
 import Unauthorized from './pages/Unauthorized';
 
 function App() {
@@ -37,12 +42,33 @@ function App() {
             <Route path="courses/:courseId/materials" element={<CourseMaterials />} />
             <Route path="materials" element={<Materials />} />
             
+            {/* Teacher Routes */}
             <Route path="materials/upload" element={
               <ProtectedRoute allowedRoles={['teacher']}>
                 <UploadMaterial />
               </ProtectedRoute>
             } />
             
+            <Route path="courses/:courseId/enroll" element={
+              <ProtectedRoute allowedRoles={['teacher']}>
+                <EnrollStudents />
+              </ProtectedRoute>
+            } />
+            
+            <Route path="courses/:courseId/settings" element={
+              <ProtectedRoute allowedRoles={['teacher']}>
+                <CourseSettings />
+              </ProtectedRoute>
+            } />
+            
+            {/* Student Routes */}
+            <Route path="student/enrollments" element={
+              <ProtectedRoute allowedRoles={['student']}>
+                <MyEnrollments />
+              </ProtectedRoute>
+            } />
+            
+            {/* School Admin Routes */}
             <Route path="admin/create-user" element={
               <ProtectedRoute allowedRoles={['school_admin']}>
                 <CreateUser />
@@ -55,6 +81,19 @@ function App() {
               </ProtectedRoute>
             } />
             
+            <Route path="admin/admit-student" element={
+              <ProtectedRoute allowedRoles={['school_admin']}>
+                <AdmitStudent />
+              </ProtectedRoute>
+            } />
+            
+            <Route path="admin/bulk-admit" element={
+              <ProtectedRoute allowedRoles={['school_admin']}>
+                <BulkAdmitStudents />
+              </ProtectedRoute>
+            } />
+            
+            {/* Super Admin Routes */}
             <Route path="admin/create-school" element={
               <ProtectedRoute allowedRoles={['super_admin']}>
                 <CreateSchool />

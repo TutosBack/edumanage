@@ -12,7 +12,10 @@ import {
   X,
   LogOut,
   UserCog,
-  Building2
+  Building2,
+  UserPlus,
+  FileText,
+  BookOpen
 } from 'lucide-react';
 
 const Sidebar: React.FC = () => {
@@ -42,7 +45,9 @@ const Sidebar: React.FC = () => {
         items.push(
           { to: '/courses', label: 'Courses', icon: Book },
           { to: '/admin/manage-users', label: 'Manage Users', icon: UserCog },
-          { to: '/admin/create-user', label: 'Add User', icon: Users }
+          { to: '/admin/create-user', label: 'Add User', icon: Users },
+          { to: '/admin/admit-student', label: 'Admit Student', icon: UserPlus },
+          { to: '/admin/bulk-admit', label: 'Bulk Admit', icon: GraduationCap }
         );
         break;
       case 'teacher':
@@ -54,7 +59,8 @@ const Sidebar: React.FC = () => {
       case 'student':
         items.push(
           { to: '/courses', label: 'Courses', icon: Book },
-          { to: '/materials', label: 'Materials', icon: Upload }
+          { to: '/materials', label: 'Materials', icon: FileText },
+          { to: '/student/enrollments', label: 'My Enrollments', icon: BookOpen }
         );
         break;
     }

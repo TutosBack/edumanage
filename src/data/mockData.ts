@@ -1,4 +1,4 @@
-import { User, School, Course, Material, Class } from '../types';
+import { User, School, Course, Material, Class, Enrollment, BulkStudentData, BulkUploadResult } from '../types';
 
 export const schools: School[] = [
   {
@@ -98,7 +98,7 @@ export const classes: Class[] = [
   { id: 23, name: "8th Grade A", school_id: 5, grade_level: "8th Grade", created_at: "2024-02-01" },
 ];
 
-export const users: User[] = [
+export let users: User[] = [
   // Super Admin
   {
     id: 1,
@@ -117,7 +117,8 @@ export const users: User[] = [
     username: "jane.smith",
     password: "password123",
     role: "school_admin",
-    school_ids: [1]
+    school_ids: [1],
+    current_school_id: 1
   },
   {
     id: 3,
@@ -126,7 +127,8 @@ export const users: User[] = [
     username: "robert.t",
     password: "admin789",
     role: "school_admin",
-    school_ids: [2, 3]
+    school_ids: [2, 3],
+    current_school_id: 2
   },
   {
     id: 4,
@@ -135,7 +137,8 @@ export const users: User[] = [
     username: "lisa.a",
     password: "admin456",
     role: "school_admin",
-    school_ids: [4]
+    school_ids: [4],
+    current_school_id: 4
   },
   {
     id: 5,
@@ -144,7 +147,8 @@ export const users: User[] = [
     username: "mark.w",
     password: "admin654",
     role: "school_admin",
-    school_ids: [5]
+    school_ids: [5],
+    current_school_id: 5
   },
   
   // Teachers
@@ -156,6 +160,7 @@ export const users: User[] = [
     password: "teacher123",
     role: "teacher",
     school_ids: [1, 2],
+    current_school_id: 1,
     class_ids: [1, 2, 6]
   },
   {
@@ -166,6 +171,7 @@ export const users: User[] = [
     password: "teacher456",
     role: "teacher",
     school_ids: [2],
+    current_school_id: 2,
     class_ids: [7, 8]
   },
   {
@@ -176,6 +182,7 @@ export const users: User[] = [
     password: "teacher789",
     role: "teacher",
     school_ids: [1],
+    current_school_id: 1,
     class_ids: [3, 4, 5]
   },
   {
@@ -186,6 +193,7 @@ export const users: User[] = [
     password: "teacher321",
     role: "teacher",
     school_ids: [3],
+    current_school_id: 3,
     class_ids: [11, 12]
   },
   {
@@ -196,6 +204,7 @@ export const users: User[] = [
     password: "teacher654",
     role: "teacher",
     school_ids: [4],
+    current_school_id: 4,
     class_ids: [16, 17]
   },
   {
@@ -206,6 +215,7 @@ export const users: User[] = [
     password: "teacher987",
     role: "teacher",
     school_ids: [5],
+    current_school_id: 5,
     class_ids: [20, 21]
   },
   
@@ -218,7 +228,10 @@ export const users: User[] = [
     password: "student123",
     role: "student",
     school_ids: [1],
-    class_ids: [1]
+    current_school_id: 1,
+    class_ids: [1],
+    enrolled_courses: [1],
+    enrolled_at: { 1: "2024-01-25" }
   },
   {
     id: 32,
@@ -228,7 +241,10 @@ export const users: User[] = [
     password: "student456",
     role: "student",
     school_ids: [2],
-    class_ids: [6]
+    current_school_id: 2,
+    class_ids: [6],
+    enrolled_courses: [5],
+    enrolled_at: { 5: "2024-02-20" }
   },
   {
     id: 33,
@@ -238,7 +254,10 @@ export const users: User[] = [
     password: "student789",
     role: "student",
     school_ids: [1],
-    class_ids: [2]
+    current_school_id: 1,
+    class_ids: [2],
+    enrolled_courses: [1],
+    enrolled_at: { 1: "2024-01-25" }
   },
   {
     id: 34,
@@ -248,7 +267,10 @@ export const users: User[] = [
     password: "student321",
     role: "student",
     school_ids: [2],
-    class_ids: [7]
+    current_school_id: 2,
+    class_ids: [7],
+    enrolled_courses: [5, 7],
+    enrolled_at: { 5: "2024-02-20", 7: "2024-02-25" }
   },
   {
     id: 35,
@@ -258,7 +280,10 @@ export const users: User[] = [
     password: "student654",
     role: "student",
     school_ids: [3],
-    class_ids: [11]
+    current_school_id: 3,
+    class_ids: [11],
+    enrolled_courses: [9],
+    enrolled_at: { 9: "2024-03-20" }
   },
   {
     id: 36,
@@ -268,7 +293,10 @@ export const users: User[] = [
     password: "student987",
     role: "student",
     school_ids: [4],
-    class_ids: [16]
+    current_school_id: 4,
+    class_ids: [16],
+    enrolled_courses: [10],
+    enrolled_at: { 10: "2024-01-15" }
   },
   {
     id: 37,
@@ -278,7 +306,10 @@ export const users: User[] = [
     password: "student147",
     role: "student",
     school_ids: [5],
-    class_ids: [20]
+    current_school_id: 5,
+    class_ids: [20],
+    enrolled_courses: [13],
+    enrolled_at: { 13: "2024-02-05" }
   },
   {
     id: 38,
@@ -288,7 +319,10 @@ export const users: User[] = [
     password: "student258",
     role: "student",
     school_ids: [1],
-    class_ids: [3]
+    current_school_id: 1,
+    class_ids: [3],
+    enrolled_courses: [2, 3],
+    enrolled_at: { 2: "2024-03-05", 3: "2024-01-30" }
   },
   {
     id: 39,
@@ -298,7 +332,10 @@ export const users: User[] = [
     password: "student369",
     role: "student",
     school_ids: [2],
-    class_ids: [8]
+    current_school_id: 2,
+    class_ids: [8],
+    enrolled_courses: [6],
+    enrolled_at: { 6: "2024-03-20" }
   },
   {
     id: 40,
@@ -308,7 +345,10 @@ export const users: User[] = [
     password: "student741",
     role: "student",
     school_ids: [3],
-    class_ids: [12]
+    current_school_id: 3,
+    class_ids: [12],
+    enrolled_courses: [9],
+    enrolled_at: { 9: "2024-03-20" }
   },
   {
     id: 41,
@@ -318,7 +358,10 @@ export const users: User[] = [
     password: "student852",
     role: "student",
     school_ids: [4],
-    class_ids: [17]
+    current_school_id: 4,
+    class_ids: [17],
+    enrolled_courses: [11],
+    enrolled_at: { 11: "2024-01-20" }
   },
   {
     id: 42,
@@ -328,7 +371,10 @@ export const users: User[] = [
     password: "student963",
     role: "student",
     school_ids: [5],
-    class_ids: [21]
+    current_school_id: 5,
+    class_ids: [21],
+    enrolled_courses: [13],
+    enrolled_at: { 13: "2024-02-05" }
   },
   {
     id: 43,
@@ -338,7 +384,10 @@ export const users: User[] = [
     password: "student159",
     role: "student",
     school_ids: [1],
-    class_ids: [4]
+    current_school_id: 1,
+    class_ids: [4],
+    enrolled_courses: [3, 4],
+    enrolled_at: { 3: "2024-01-30", 4: "2024-02-15" }
   },
   {
     id: 44,
@@ -348,7 +397,10 @@ export const users: User[] = [
     password: "student357",
     role: "student",
     school_ids: [2],
-    class_ids: [9]
+    current_school_id: 2,
+    class_ids: [9],
+    enrolled_courses: [7],
+    enrolled_at: { 7: "2024-02-25" }
   },
   {
     id: 45,
@@ -358,11 +410,14 @@ export const users: User[] = [
     password: "student468",
     role: "student",
     school_ids: [3],
-    class_ids: [13]
+    current_school_id: 3,
+    class_ids: [13],
+    enrolled_courses: [8],
+    enrolled_at: { 8: "2024-03-15" }
   }
 ];
 
-export const courses: Course[] = [
+export let courses: Course[] = [
   // Green Hill School (ID: 1)
   {
     id: 1,
@@ -371,7 +426,10 @@ export const courses: Course[] = [
     school_id: 1,
     teacher_id: 10,
     class_ids: [1, 2],
-    created_at: "2024-01-20"
+    created_at: "2024-01-20",
+    self_enrollment: true,
+    enrolled_students: [31, 33],
+    max_students: 30
   },
   {
     id: 2,
@@ -380,7 +438,10 @@ export const courses: Course[] = [
     school_id: 1,
     teacher_id: 10,
     class_ids: [3, 4],
-    created_at: "2024-03-01"
+    created_at: "2024-03-01",
+    self_enrollment: false,
+    enrolled_students: [38],
+    max_students: 25
   },
   {
     id: 3,
@@ -389,7 +450,10 @@ export const courses: Course[] = [
     school_id: 1,
     teacher_id: 12,
     class_ids: [4, 5],
-    created_at: "2024-01-25"
+    created_at: "2024-01-25",
+    self_enrollment: true,
+    enrolled_students: [38, 43],
+    max_students: 28
   },
   {
     id: 4,
@@ -398,7 +462,10 @@ export const courses: Course[] = [
     school_id: 1,
     teacher_id: 12,
     class_ids: [5],
-    created_at: "2024-02-10"
+    created_at: "2024-02-10",
+    self_enrollment: false,
+    enrolled_students: [43],
+    max_students: 20
   },
   
   // Bright Future Academy (ID: 2)
@@ -409,7 +476,10 @@ export const courses: Course[] = [
     school_id: 2,
     teacher_id: 11,
     class_ids: [6, 7],
-    created_at: "2024-02-15"
+    created_at: "2024-02-15",
+    self_enrollment: true,
+    enrolled_students: [32, 34],
+    max_students: 24
   },
   {
     id: 6,
@@ -418,7 +488,10 @@ export const courses: Course[] = [
     school_id: 2,
     teacher_id: 10,
     class_ids: [8, 9],
-    created_at: "2024-03-15"
+    created_at: "2024-03-15",
+    self_enrollment: false,
+    enrolled_students: [39],
+    max_students: 22
   },
   {
     id: 7,
@@ -427,7 +500,10 @@ export const courses: Course[] = [
     school_id: 2,
     teacher_id: 11,
     class_ids: [9, 10],
-    created_at: "2024-02-20"
+    created_at: "2024-02-20",
+    self_enrollment: true,
+    enrolled_students: [34, 44],
+    max_students: 26
   },
   
   // Excellence High School (ID: 3)
@@ -438,7 +514,10 @@ export const courses: Course[] = [
     school_id: 3,
     teacher_id: 13,
     class_ids: [14, 15],
-    created_at: "2024-03-12"
+    created_at: "2024-03-12",
+    self_enrollment: false,
+    enrolled_students: [45],
+    max_students: 18
   },
   {
     id: 9,
@@ -447,7 +526,10 @@ export const courses: Course[] = [
     school_id: 3,
     teacher_id: 13,
     class_ids: [11, 12, 13],
-    created_at: "2024-03-18"
+    created_at: "2024-03-18",
+    self_enrollment: true,
+    enrolled_students: [35, 40],
+    max_students: 30
   },
   
   // Riverside Elementary (ID: 4)
@@ -458,7 +540,10 @@ export const courses: Course[] = [
     school_id: 4,
     teacher_id: 14,
     class_ids: [16, 17, 18],
-    created_at: "2024-01-10"
+    created_at: "2024-01-10",
+    self_enrollment: false,
+    enrolled_students: [36],
+    max_students: 25
   },
   {
     id: 11,
@@ -467,7 +552,10 @@ export const courses: Course[] = [
     school_id: 4,
     teacher_id: 14,
     class_ids: [18, 19],
-    created_at: "2024-01-12"
+    created_at: "2024-01-12",
+    self_enrollment: false,
+    enrolled_students: [41],
+    max_students: 22
   },
   
   // Mountain View Middle School (ID: 5)
@@ -478,7 +566,10 @@ export const courses: Course[] = [
     school_id: 5,
     teacher_id: 15,
     class_ids: [22, 23],
-    created_at: "2024-02-01"
+    created_at: "2024-02-01",
+    self_enrollment: true,
+    enrolled_students: [],
+    max_students: 28
   },
   {
     id: 13,
@@ -487,7 +578,10 @@ export const courses: Course[] = [
     school_id: 5,
     teacher_id: 15,
     class_ids: [20, 21],
-    created_at: "2024-02-03"
+    created_at: "2024-02-03",
+    self_enrollment: true,
+    enrolled_students: [37, 42],
+    max_students: 26
   }
 ];
 
@@ -681,4 +775,239 @@ export const materials: Material[] = [
     uploaded_by: 15,
     created_at: "2024-02-10"
   }
-]
+];
+
+export let enrollments: Enrollment[] = [
+  { id: 1, student_id: 31, course_id: 1, enrolled_by: 10, enrolled_at: "2024-01-25", status: "active" },
+  { id: 2, student_id: 33, course_id: 1, enrolled_by: 10, enrolled_at: "2024-01-25", status: "active" },
+  { id: 3, student_id: 32, course_id: 5, enrolled_by: 11, enrolled_at: "2024-02-20", status: "active" },
+  { id: 4, student_id: 34, course_id: 5, enrolled_by: 11, enrolled_at: "2024-02-20", status: "active" },
+  { id: 5, student_id: 34, course_id: 7, enrolled_by: 11, enrolled_at: "2024-02-25", status: "active" },
+  { id: 6, student_id: 35, course_id: 9, enrolled_by: 13, enrolled_at: "2024-03-20", status: "active" },
+  { id: 7, student_id: 36, course_id: 10, enrolled_by: 14, enrolled_at: "2024-01-15", status: "active" },
+  { id: 8, student_id: 37, course_id: 13, enrolled_by: 15, enrolled_at: "2024-02-05", status: "active" },
+  { id: 9, student_id: 38, course_id: 2, enrolled_by: 10, enrolled_at: "2024-03-05", status: "active" },
+  { id: 10, student_id: 38, course_id: 3, enrolled_by: 12, enrolled_at: "2024-01-30", status: "active" },
+  { id: 11, student_id: 39, course_id: 6, enrolled_by: 10, enrolled_at: "2024-03-20", status: "active" },
+  { id: 12, student_id: 40, course_id: 9, enrolled_by: 13, enrolled_at: "2024-03-20", status: "active" },
+  { id: 13, student_id: 41, course_id: 11, enrolled_by: 14, enrolled_at: "2024-01-20", status: "active" },
+  { id: 14, student_id: 42, course_id: 13, enrolled_by: 15, enrolled_at: "2024-02-05", status: "active" },
+  { id: 15, student_id: 43, course_id: 3, enrolled_by: 12, enrolled_at: "2024-01-30", status: "active" },
+  { id: 16, student_id: 43, course_id: 4, enrolled_by: 12, enrolled_at: "2024-02-15", status: "active" },
+  { id: 17, student_id: 44, course_id: 7, enrolled_by: 11, enrolled_at: "2024-02-25", status: "active" },
+  { id: 18, student_id: 45, course_id: 8, enrolled_by: 13, enrolled_at: "2024-03-15", status: "active" },
+];
+
+// Helper functions for data manipulation
+export const getNextUserId = (): number => {
+  return Math.max(...users.map(u => u.id)) + 1;
+};
+
+export const getNextEnrollmentId = (): number => {
+  return Math.max(...enrollments.map(e => e.id)) + 1;
+};
+
+// Student admission functions
+export const admitStudent = (studentData: {
+  name: string;
+  email: string;
+  username: string;
+  password: string;
+  class_id: number;
+  school_id: number;
+}): User => {
+  const newStudent: User = {
+    id: getNextUserId(),
+    name: studentData.name,
+    email: studentData.email,
+    username: studentData.username,
+    password: studentData.password,
+    role: 'student',
+    school_ids: [studentData.school_id],
+    current_school_id: studentData.school_id,
+    class_ids: [studentData.class_id],
+    enrolled_courses: [],
+    enrolled_at: {},
+    status: 'active',
+    created_at: new Date().toISOString().split('T')[0]
+  };
+
+  users.push(newStudent);
+  return newStudent;
+};
+
+export const bulkAdmitStudents = (studentsData: BulkStudentData[], schoolId: number): BulkUploadResult => {
+  const result: BulkUploadResult = {
+    success: [],
+    errors: []
+  };
+
+  studentsData.forEach((studentData, index) => {
+    try {
+      // Find class by name and school
+      const targetClass = classes.find(c => 
+        c.name.toLowerCase() === studentData.class_name.toLowerCase() && 
+        c.school_id === schoolId
+      );
+
+      if (!targetClass) {
+        result.errors.push({
+          row: index + 1,
+          data: studentData,
+          error: `Class "${studentData.class_name}" not found in school`
+        });
+        return;
+      }
+
+      // Check for duplicate email or username
+      const existingUser = users.find(u => 
+        u.email === studentData.email || u.username === studentData.username
+      );
+
+      if (existingUser) {
+        result.errors.push({
+          row: index + 1,
+          data: studentData,
+          error: `User with email "${studentData.email}" or username "${studentData.username}" already exists`
+        });
+        return;
+      }
+
+      // Generate password if not provided
+      const password = `student${Math.random().toString(36).slice(-6)}`;
+
+      const newStudent = admitStudent({
+        name: studentData.name,
+        email: studentData.email,
+        username: studentData.username,
+        password: password,
+        class_id: targetClass.id,
+        school_id: schoolId
+      });
+
+      result.success.push(studentData);
+    } catch (error) {
+      result.errors.push({
+        row: index + 1,
+        data: studentData,
+        error: `Failed to create student: ${error}`
+      });
+    }
+  });
+
+  return result;
+};
+
+// Course enrollment functions
+export const enrollStudentInCourse = (studentId: number, courseId: number, enrolledBy: number): boolean => {
+  try {
+    const student = users.find(u => u.id === studentId);
+    const course = courses.find(c => c.id === courseId);
+
+    if (!student || !course) {
+      return false;
+    }
+
+    // Check if already enrolled
+    if (student.enrolled_courses?.includes(courseId)) {
+      return false;
+    }
+
+    // Check course capacity
+    if (course.enrolled_students && course.max_students && 
+        course.enrolled_students.length >= course.max_students) {
+      return false;
+    }
+
+    // Update student enrollment
+    if (!student.enrolled_courses) student.enrolled_courses = [];
+    if (!student.enrolled_at) student.enrolled_at = {};
+    
+    student.enrolled_courses.push(courseId);
+    student.enrolled_at[courseId] = new Date().toISOString().split('T')[0];
+
+    // Update course enrollment
+    if (!course.enrolled_students) course.enrolled_students = [];
+    course.enrolled_students.push(studentId);
+
+    // Add enrollment record
+    const newEnrollment: Enrollment = {
+      id: getNextEnrollmentId(),
+      student_id: studentId,
+      course_id: courseId,
+      enrolled_by: enrolledBy,
+      enrolled_at: new Date().toISOString().split('T')[0],
+      status: 'active'
+    };
+
+    enrollments.push(newEnrollment);
+    return true;
+  } catch (error) {
+    console.error('Error enrolling student:', error);
+    return false;
+  }
+};
+
+export const unenrollStudentFromCourse = (studentId: number, courseId: number): boolean => {
+  try {
+    const student = users.find(u => u.id === studentId);
+    const course = courses.find(c => c.id === courseId);
+
+    if (!student || !course) {
+      return false;
+    }
+
+    // Update student enrollment
+    if (student.enrolled_courses) {
+      student.enrolled_courses = student.enrolled_courses.filter(id => id !== courseId);
+    }
+    if (student.enrolled_at) {
+      delete student.enrolled_at[courseId];
+    }
+
+    // Update course enrollment
+    if (course.enrolled_students) {
+      course.enrolled_students = course.enrolled_students.filter(id => id !== studentId);
+    }
+
+    // Update enrollment record
+    const enrollment = enrollments.find(e => 
+      e.student_id === studentId && e.course_id === courseId && e.status === 'active'
+    );
+    if (enrollment) {
+      enrollment.status = 'dropped';
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Error unenrolling student:', error);
+    return false;
+  }
+};
+
+export const toggleCourseSelfEnrollment = (courseId: number, enabled: boolean): boolean => {
+  try {
+    const course = courses.find(c => c.id === courseId);
+    if (!course) return false;
+
+    course.self_enrollment = enabled;
+    return true;
+  } catch (error) {
+    console.error('Error toggling self enrollment:', error);
+    return false;
+  }
+};
+
+export const studentSelfEnroll = (studentId: number, courseId: number): boolean => {
+  try {
+    const course = courses.find(c => c.id === courseId);
+    if (!course || !course.self_enrollment) {
+      return false;
+    }
+
+    return enrollStudentInCourse(studentId, courseId, studentId);
+  } catch (error) {
+    console.error('Error in self enrollment:', error);
+    return false;
+  }
+};
