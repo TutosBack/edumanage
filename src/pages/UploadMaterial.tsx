@@ -55,10 +55,10 @@ const UploadMaterial: React.FC = () => {
   if (user?.role !== 'teacher') {
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+        <div className="bg-error-50 border border-error-100 rounded-lg p-6">
           <div className="flex items-center">
-            <AlertCircle className="h-5 w-5 text-red-500 mr-2" />
-            <span className="text-red-700">Only teachers can upload materials.</span>
+            <AlertCircle className="h-5 w-5 text-error-500 mr-2" />
+            <span className="text-error-700">Only teachers can upload materials.</span>
           </div>
         </div>
       </div>
@@ -196,7 +196,7 @@ const UploadMaterial: React.FC = () => {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-company-primary hover:bg-company-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-company-primary transition-colors"
             >
               Upload Material
             </button>

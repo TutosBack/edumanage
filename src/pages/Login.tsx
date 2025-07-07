@@ -115,17 +115,17 @@ const Login: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
-              <GraduationCap className="h-16 w-16 text-blue-600" />
+              <GraduationCap className="h-16 w-16 text-company-primary" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Educate</h1>
             <p className="text-gray-600">School Learning Management System</p>
           </div>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <div className="mb-6 p-4 bg-error-50 border border-error-100 rounded-lg">
               <div className="flex items-center">
-                <AlertCircle className="h-5 w-5 text-red-500 mr-2" />
-                <span className="text-red-700 text-sm">{error}</span>
+                <AlertCircle className="h-5 w-5 text-error-500 mr-2" />
+                <span className="text-error-700 text-sm">{error}</span>
               </div>
             </div>
           )}
@@ -175,7 +175,7 @@ const Login: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                className="w-full bg-company-primary text-white py-3 px-4 rounded-lg font-medium hover:bg-company-primary-700 focus:outline-none focus:ring-2 focus:ring-company-primary focus:ring-offset-2 transition-colors"
               >
                 Sign In
               </button>
@@ -219,7 +219,7 @@ const Login: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                  className="flex-1 bg-company-primary text-white py-3 px-4 rounded-lg font-medium hover:bg-company-primary-700 focus:outline-none focus:ring-2 focus:ring-company-primary focus:ring-offset-2 transition-colors"
                 >
                   Continue
                 </button>

@@ -24,7 +24,7 @@ const CourseMaterials: React.FC = () => {
       <div className="text-center py-12">
         <Book className="h-12 w-12 text-gray-400 mx-auto mb-4" />
         <h3 className="text-lg font-medium text-gray-900 mb-2">Course not found</h3>
-        <Link to="/courses" className="text-blue-600 hover:text-blue-700">
+        <Link to="/courses" className="text-company-primary hover:text-company-primary-700">
           Back to Courses
         </Link>
       </div>
@@ -39,15 +39,15 @@ const CourseMaterials: React.FC = () => {
   if (user?.role === 'student' && !isStudentEnrolled) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+        <div className="bg-warning-50 border border-warning-200 rounded-lg p-6">
           <div className="flex items-center">
-            <Book className="h-5 w-5 text-yellow-500 mr-2" />
-            <span className="text-yellow-700">You are not enrolled in this course.</span>
+            <Book className="h-5 w-5 text-warning-500 mr-2" />
+            <span className="text-warning-700">You are not enrolled in this course.</span>
           </div>
           <div className="mt-4">
             <Link
               to="/courses"
-              className="text-yellow-600 hover:text-yellow-700 font-medium"
+              className="text-warning-600 hover:text-warning-700 font-medium"
             >
               Browse available courses →
             </Link>
@@ -111,7 +111,7 @@ const CourseMaterials: React.FC = () => {
                 </div>
               </div>
             </div>
-            <Book className="h-16 w-16 text-blue-600" />
+            <Book className="h-16 w-16 text-company-primary" />
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@ const CourseMaterials: React.FC = () => {
                     
                     <button
                       onClick={() => alert(`Downloading ${material.title}`)}
-                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700 transition-colors"
                     >
                       <Download className="h-4 w-4 mr-2" />
                       Download
@@ -217,7 +217,7 @@ const CourseMaterials: React.FC = () => {
             </Link>
             <Link
               to="/courses"
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700 transition-colors"
             >
               Browse Other Courses
             </Link>

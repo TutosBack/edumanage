@@ -59,10 +59,10 @@ const ManageUsers: React.FC = () => {
   if (user?.role !== 'school_admin') {
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+        <div className="bg-error-50 border border-error-100 rounded-lg p-6">
           <div className="flex items-center">
-            <Users className="h-5 w-5 text-red-500 mr-2" />
-            <span className="text-red-700">Only school administrators can manage users.</span>
+            <Users className="h-5 w-5 text-error-500 mr-2" />
+            <span className="text-error-700">Only school administrators can manage users.</span>
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@ const ManageUsers: React.FC = () => {
           </div>
           <Link
             to="/admin/create-user"
-            className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+            className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700"
           >
             <Plus className="h-4 w-4 mr-2" />
             Add User
@@ -94,11 +94,11 @@ const ManageUsers: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Total Teachers</p>
-              <p className="text-3xl font-bold text-green-600">
+              <p className="text-3xl font-bold text-success-600">
                 {schoolUsers.filter(u => u.role === 'teacher').length}
               </p>
             </div>
-            <BookOpen className="h-12 w-12 text-green-600" />
+            <BookOpen className="h-12 w-12 text-success-600" />
           </div>
         </div>
 
@@ -106,11 +106,11 @@ const ManageUsers: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Total Students</p>
-              <p className="text-3xl font-bold text-blue-600">
+              <p className="text-3xl font-bold text-company-primary">
                 {schoolUsers.filter(u => u.role === 'student').length}
               </p>
             </div>
-            <GraduationCap className="h-12 w-12 text-blue-600" />
+            <GraduationCap className="h-12 w-12 text-company-primary" />
           </div>
         </div>
 
@@ -118,9 +118,9 @@ const ManageUsers: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Total Classes</p>
-              <p className="text-3xl font-bold text-purple-600">{schoolClasses.length}</p>
+              <p className="text-3xl font-bold text-company-secondary">{schoolClasses.length}</p>
             </div>
-            <Users className="h-12 w-12 text-purple-600" />
+            <Users className="h-12 w-12 text-company-secondary" />
           </div>
         </div>
       </div>
@@ -137,7 +137,7 @@ const ManageUsers: React.FC = () => {
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === tab.id
-                  ? 'border-blue-500 text-blue-600'
+                  ? 'border-company-primary-500 text-company-primary'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
@@ -225,7 +225,7 @@ const ManageUsers: React.FC = () => {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                  <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success-800">
                     Active
                   </span>
                 </td>
@@ -236,21 +236,21 @@ const ManageUsers: React.FC = () => {
                   <div className="flex items-center justify-end space-x-2">
                     <button
                       onClick={() => handleEditUser(user.id)}
-                      className="text-blue-600 hover:text-blue-900 p-1"
+                      className="text-company-primary hover:text-company-primary-900 p-1"
                       title="Edit user"
                     >
                       <Edit className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => handleToggleUserStatus(user.id)}
-                      className="text-yellow-600 hover:text-yellow-900 p-1"
+                      className="text-warning-600 hover:text-warning-900 p-1"
                       title="Toggle status"
                     >
                       <UserX className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => handleDeleteUser(user.id)}
-                      className="text-red-600 hover:text-red-900 p-1"
+                      className="text-error-600 hover:text-error-900 p-1"
                       title="Delete user"
                     >
                       <Trash2 className="h-4 w-4" />
@@ -273,7 +273,7 @@ const ManageUsers: React.FC = () => {
             </p>
             <Link
               to="/admin/create-user"
-              className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+              className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700"
             >
               <Plus className="h-4 w-4 mr-2" />
               Add {activeTab === 'teachers' ? 'Teacher' : 'Student'}

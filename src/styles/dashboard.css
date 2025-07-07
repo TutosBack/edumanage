@@ -495,3 +495,10 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+.bg-success-100 { background-color: var(--success-100); }
+.text-success-800 { color: #166534; } /* or your preferred dark green */
+.bg-company-primary-100 { background-color: var(--company-primary-100); }
+.text-company-primary-800 { color: var(--company-primary-800); }
+.bg-company-secondary-100 { background-color: var(--company-secondary-100); }
+.text-company-secondary-800 { color: var(--company-secondary-800); }

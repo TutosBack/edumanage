@@ -66,7 +66,7 @@ const Courses: React.FC = () => {
             <div key={course.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <Book className="h-8 w-8 text-blue-600" />
+                  <Book className="h-8 w-8 text-company-primary" />
                   <span className="text-sm text-gray-500">
                     {getMaterialCount(course.id)} materials
                   </span>
@@ -93,7 +93,7 @@ const Courses: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <Link
                     to={`/courses/${course.id}`}
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700 transition-colors"
                   >
                     View Details
                   </Link>

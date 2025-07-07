@@ -26,7 +26,7 @@ const CourseDetails: React.FC = () => {
       <div className="text-center py-12">
         <Book className="h-12 w-12 text-gray-400 mx-auto mb-4" />
         <h3 className="text-lg font-medium text-gray-900 mb-2">Course not found</h3>
-        <Link to="/courses" className="text-blue-600 hover:text-blue-700">
+        <Link to="/courses" className="text-company-primary hover:text-company-primary-700">
           Back to Courses
         </Link>
       </div>
@@ -77,7 +77,7 @@ const CourseDetails: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link
               to="/courses"
-              className="inline-flex items-center text-gray-600 hover:text-gray-900"
+              className="inline-flex items-center text-company-primary hover:text-company-primary-700"
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
               Back to Courses
@@ -87,12 +87,12 @@ const CourseDetails: React.FC = () => {
             <div className="flex items-center space-x-3">
               <Link
                 to="/materials/upload"
-                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-success-600 hover:bg-success-700"
               >
                 <Upload className="h-4 w-4 mr-2" />
                 Upload Material
               </Link>
-              <button className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+              <button className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700">
                 <Edit className="h-4 w-4 mr-2" />
                 Edit Course
               </button>
@@ -114,9 +114,9 @@ const CourseDetails: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Teacher</p>
-              <p className="text-lg font-semibold text-blue-600">{teacher?.name || 'Not assigned'}</p>
+              <p className="text-lg font-semibold text-company-primary">{teacher?.name || 'Not assigned'}</p>
             </div>
-            <User className="h-8 w-8 text-blue-600" />
+            <User className="h-8 w-8 text-company-primary" />
           </div>
         </div>
 
@@ -124,9 +124,9 @@ const CourseDetails: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Materials</p>
-              <p className="text-lg font-semibold text-purple-600">{courseMaterials.length}</p>
+              <p className="text-lg font-semibold text-company-secondary">{courseMaterials.length}</p>
             </div>
-            <FileText className="h-8 w-8 text-purple-600" />
+            <FileText className="h-8 w-8 text-company-secondary" />
           </div>
         </div>
 
@@ -137,9 +137,9 @@ const CourseDetails: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">Students</p>
-                  <p className="text-lg font-semibold text-green-600">{enrolledStudents.length}</p>
+                  <p className="text-lg font-semibold text-success-600">{enrolledStudents.length}</p>
                 </div>
-                <GraduationCap className="h-8 w-8 text-green-600" />
+                <GraduationCap className="h-8 w-8 text-success-600" />
               </div>
             </div>
 
@@ -166,7 +166,7 @@ const CourseDetails: React.FC = () => {
                 {canManageCourse && (
                   <Link
                     to="/materials/upload"
-                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700"
                   >
                     <Upload className="h-4 w-4 mr-2" />
                     Add Material
@@ -209,7 +209,7 @@ const CourseDetails: React.FC = () => {
                           
                           <button
                             onClick={() => alert(`Downloading ${material.title}`)}
-                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700"
                           >
                             <Download className="h-4 w-4 mr-1" />
                             Download
@@ -232,7 +232,7 @@ const CourseDetails: React.FC = () => {
                 {canManageCourse && (
                   <Link
                     to="/materials/upload"
-                    className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                    className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700"
                   >
                     <Upload className="h-4 w-4 mr-2" />
                     Upload Material

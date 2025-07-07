@@ -31,7 +31,7 @@ const SchoolDetails: React.FC = () => {
       <div className="text-center py-12">
         <Building2 className="h-12 w-12 text-gray-400 mx-auto mb-4" />
         <h3 className="text-lg font-medium text-gray-900 mb-2">School not found</h3>
-        <Link to="/schools" className="text-blue-600 hover:text-blue-700">
+        <Link to="/schools" className="text-company-primary hover:text-company-primary-700">
           Back to Schools
         </Link>
       </div>
@@ -80,10 +80,10 @@ const SchoolDetails: React.FC = () => {
   if (user?.role !== 'super_admin') {
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+        <div className="bg-error-50 border border-error-100 rounded-lg p-6">
           <div className="flex items-center">
-            <Building2 className="h-5 w-5 text-red-500 mr-2" />
-            <span className="text-red-700">Only super administrators can view school details.</span>
+            <Building2 className="h-5 w-5 text-error-500 mr-2" />
+            <span className="text-error-700">Only super administrators can view school details.</span>
           </div>
         </div>
       </div>
@@ -98,13 +98,13 @@ const SchoolDetails: React.FC = () => {
           <div className="flex items-center space-x-4">
             <Link
               to="/schools"
-              className="inline-flex items-center text-gray-600 hover:text-gray-900"
+              className="text-company-primary hover:text-company-primary-700"
             >
               <ArrowLeft className="h-5 w-5 mr-2" />
               Back to Schools
             </Link>
           </div>
-          <button className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+          <button className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700">
             <Edit className="h-4 w-4 mr-2" />
             Edit School
           </button>
@@ -131,7 +131,7 @@ const SchoolDetails: React.FC = () => {
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === tab.id
-                  ? 'border-blue-500 text-blue-600'
+                  ? 'border-company-primary-500 text-company-primary'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
@@ -149,9 +149,9 @@ const SchoolDetails: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Users</p>
-                <p className="text-3xl font-bold text-blue-600">{schoolUsers.length}</p>
+                <p className="text-3xl font-bold text-company-primary">{schoolUsers.length}</p>
               </div>
-              <Users className="h-12 w-12 text-blue-600" />
+              <Users className="h-12 w-12 text-company-primary" />
             </div>
           </div>
 
@@ -159,11 +159,11 @@ const SchoolDetails: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Teachers</p>
-                <p className="text-3xl font-bold text-green-600">
+                <p className="text-3xl font-bold text-success-600">
                   {schoolUsers.filter(u => u.role === 'teacher').length}
                 </p>
               </div>
-              <UserCheck className="h-12 w-12 text-green-600" />
+              <UserCheck className="h-12 w-12 text-success-600" />
             </div>
           </div>
 
@@ -171,11 +171,11 @@ const SchoolDetails: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Students</p>
-                <p className="text-3xl font-bold text-purple-600">
+                <p className="text-3xl font-bold text-company-secondary">
                   {schoolUsers.filter(u => u.role === 'student').length}
                 </p>
               </div>
-              <GraduationCap className="h-12 w-12 text-purple-600" />
+              <GraduationCap className="h-12 w-12 text-company-secondary" />
             </div>
           </div>
 
@@ -203,14 +203,14 @@ const SchoolDetails: React.FC = () => {
                   placeholder="Search users..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-company-primary focus:border-transparent"
                 />
               </div>
               
               <select
                 value={userFilter}
                 onChange={(e) => setUserFilter(e.target.value as any)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-company-primary focus:border-transparent"
               >
                 <option value="all">All Users</option>
                 <option value="teachers">Teachers</option>
@@ -219,7 +219,7 @@ const SchoolDetails: React.FC = () => {
               </select>
             </div>
             
-            <button className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+            <button className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-company-primary hover:bg-company-primary-700">
               <Plus className="h-4 w-4 mr-2" />
               Add User
             </button>
@@ -258,9 +258,9 @@ const SchoolDetails: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                        user.role === 'teacher' ? 'bg-green-100 text-green-800' :
-                        user.role === 'student' ? 'bg-blue-100 text-blue-800' :
-                        'bg-purple-100 text-purple-800'
+                        user.role === 'teacher' ? 'bg-success-100 text-success-800' :
+                        user.role === 'student' ? 'bg-company-primary-100 text-company-primary-800' :
+                        'bg-company-secondary-100 text-company-secondary-800'
                       }`}>
                         {user.role.replace('_', ' ')}
                       </span>
@@ -269,7 +269,7 @@ const SchoolDetails: React.FC = () => {
                       {getClassNames(user.class_ids)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                      <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-success-100 text-success-800">
                         Active
                       </span>
                     </td>
@@ -277,19 +277,19 @@ const SchoolDetails: React.FC = () => {
                       <div className="flex items-center justify-end space-x-2">
                         <button
                           onClick={() => handleEditUser(user.id)}
-                          className="text-blue-600 hover:text-blue-900"
+                          className="text-company-primary hover:text-company-primary-900 p-1"
                         >
                           <Edit className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleToggleUserStatus(user.id)}
-                          className="text-yellow-600 hover:text-yellow-900"
+                          className="text-warning-600 hover:text-warning-900 p-1"
                         >
                           <UserX className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteUser(user.id)}
-                          className="text-red-600 hover:text-red-900"
+                          className="text-error-600 hover:text-error-900 p-1"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -313,7 +313,7 @@ const SchoolDetails: React.FC = () => {
                 <span className="text-sm text-gray-500">Created: {course.created_at}</span>
                 <Link
                   to={`/courses/${course.id}`}
-                  className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                  className="text-company-primary hover:text-company-primary-700 text-sm font-medium"
                 >
                   View Details
                 </Link>
