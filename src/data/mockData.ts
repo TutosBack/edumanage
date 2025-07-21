@@ -1011,3 +1011,278 @@ export const studentSelfEnroll = (studentId: number, courseId: number): boolean 
     return false;
   }
 };
+
+// Messages and Conversations
+export let messages: Message[] = [
+  {
+    id: 1,
+    sender_id: 10, // Teacher Mary
+    receiver_id: 31, // Student John
+    content: "Hi John, how are you finding the mathematics course so far?",
+    message_type: 'text',
+    sent_at: "2024-01-20T10:30:00Z",
+    read_at: "2024-01-20T10:45:00Z",
+    is_read: true,
+    course_id: 1
+  },
+  {
+    id: 2,
+    sender_id: 31, // Student John
+    receiver_id: 10, // Teacher Mary
+    content: "Hello Ms. Mary! I'm enjoying it but struggling with fractions. Could you help me?",
+    message_type: 'text',
+    sent_at: "2024-01-20T10:50:00Z",
+    read_at: "2024-01-20T11:00:00Z",
+    is_read: true,
+    course_id: 1
+  },
+  {
+    id: 3,
+    sender_id: 10, // Teacher Mary
+    receiver_id: 31, // Student John
+    content: "Of course! Let's schedule a quick call to go over fractions.",
+    message_type: 'text',
+    sent_at: "2024-01-20T11:05:00Z",
+    is_read: false,
+    course_id: 1
+  }
+];
+
+export let conversations: Conversation[] = [
+  {
+    id: 1,
+    participants: [10, 31], // Teacher Mary and Student John
+    course_id: 1,
+    last_message: messages[2],
+    created_at: "2024-01-20T10:30:00Z",
+    updated_at: "2024-01-20T11:05:00Z"
+  }
+];
+
+// Goals System
+export let goals: Goal[] = [
+  // Student Goals
+  {
+    id: 1,
+    user_id: 31, // Student John
+    title: "Complete Math Homework",
+    description: "Finish all assigned mathematics exercises",
+    goal_type: 'daily',
+    category: 'course_specific',
+    course_id: 1,
+    target_value: 1,
+    current_value: 0,
+    unit: 'assignment',
+    status: 'active',
+    due_date: "2024-01-21T23:59:59Z",
+    created_at: "2024-01-20T08:00:00Z"
+  },
+  {
+    id: 2,
+    user_id: 31, // Student John
+    title: "Study 2 Hours Daily",
+    description: "Dedicate at least 2 hours daily to studying",
+    goal_type: 'daily',
+    category: 'academic',
+    target_value: 2,
+    current_value: 1.5,
+    unit: 'hours',
+    status: 'active',
+    due_date: "2024-01-21T23:59:59Z",
+    created_at: "2024-01-20T08:00:00Z"
+  },
+  {
+    id: 3,
+    user_id: 31, // Student John
+    title: "Read 3 Chapters This Week",
+    description: "Complete reading assignments for English class",
+    goal_type: 'weekly',
+    category: 'course_specific',
+    course_id: 2,
+    target_value: 3,
+    current_value: 1,
+    unit: 'chapters',
+    status: 'active',
+    due_date: "2024-01-27T23:59:59Z",
+    created_at: "2024-01-20T08:00:00Z"
+  },
+  // Teacher Goals
+  {
+    id: 4,
+    user_id: 10, // Teacher Mary
+    title: "Grade All Assignments",
+    description: "Complete grading for all submitted assignments",
+    goal_type: 'daily',
+    category: 'academic',
+    target_value: 25,
+    current_value: 20,
+    unit: 'assignments',
+    status: 'active',
+    due_date: "2024-01-21T17:00:00Z",
+    created_at: "2024-01-20T08:00:00Z"
+  },
+  {
+    id: 5,
+    user_id: 10, // Teacher Mary
+    title: "Prepare Weekly Lesson Plans",
+    description: "Create detailed lesson plans for next week's classes",
+    goal_type: 'weekly',
+    category: 'academic',
+    target_value: 5,
+    current_value: 3,
+    unit: 'lessons',
+    status: 'active',
+    due_date: "2024-01-26T17:00:00Z",
+    created_at: "2024-01-20T08:00:00Z"
+  }
+];
+
+export let goalProgress: GoalProgress[] = [
+  {
+    id: 1,
+    goal_id: 2,
+    progress_value: 1.5,
+    notes: "Studied mathematics and science today",
+    recorded_at: "2024-01-20T20:00:00Z"
+  },
+  {
+    id: 2,
+    goal_id: 4,
+    progress_value: 20,
+    notes: "Graded math assignments",
+    recorded_at: "2024-01-20T16:00:00Z"
+  }
+];
+
+// Helper functions for messaging
+export const getNextMessageId = (): number => {
+  return Math.max(...messages.map(m => m.id)) + 1;
+};
+
+export const getNextConversationId = (): number => {
+  return Math.max(...conversations.map(c => c.id)) + 1;
+};
+
+export const sendMessage = (senderId: number, receiverId: number, content: string, messageType: 'text' | 'audio' = 'text', courseId?: number, audioUrl?: string, audioDuration?: number): Message => {
+  const newMessage: Message = {
+    id: getNextMessageId(),
+    sender_id: senderId,
+    receiver_id: receiverId,
+    content,
+    message_type: messageType,
+    audio_url: audioUrl,
+    audio_duration: audioDuration,
+    sent_at: new Date().toISOString(),
+    is_read: false,
+    course_id: courseId
+  };
+
+  messages.push(newMessage);
+
+  // Update or create conversation
+  let conversation = conversations.find(c => 
+    c.participants.includes(senderId) && c.participants.includes(receiverId)
+  );
+
+  if (!conversation) {
+    conversation = {
+      id: getNextConversationId(),
+      participants: [senderId, receiverId],
+      course_id: courseId,
+      last_message: newMessage,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    conversations.push(conversation);
+  } else {
+    conversation.last_message = newMessage;
+    conversation.updated_at = new Date().toISOString();
+  }
+
+  return newMessage;
+};
+
+export const markMessageAsRead = (messageId: number): boolean => {
+  const message = messages.find(m => m.id === messageId);
+  if (message && !message.is_read) {
+    message.is_read = true;
+    message.read_at = new Date().toISOString();
+    return true;
+  }
+  return false;
+};
+
+export const getUserConversations = (userId: number): Conversation[] => {
+  return conversations.filter(c => c.participants.includes(userId))
+    .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+};
+
+export const getConversationMessages = (conversationId: number): Message[] => {
+  const conversation = conversations.find(c => c.id === conversationId);
+  if (!conversation) return [];
+
+  return messages.filter(m => 
+    conversation.participants.includes(m.sender_id) && 
+    conversation.participants.includes(m.receiver_id)
+  ).sort((a, b) => new Date(a.sent_at).getTime() - new Date(b.sent_at).getTime());
+};
+
+// Helper functions for goals
+export const getNextGoalId = (): number => {
+  return Math.max(...goals.map(g => g.id)) + 1;
+};
+
+export const createGoal = (goalData: Omit<Goal, 'id' | 'created_at' | 'current_value'>): Goal => {
+  const newGoal: Goal = {
+    ...goalData,
+    id: getNextGoalId(),
+    current_value: 0,
+    created_at: new Date().toISOString()
+  };
+
+  goals.push(newGoal);
+  return newGoal;
+};
+
+export const updateGoalProgress = (goalId: number, progressValue: number, notes?: string): boolean => {
+  const goal = goals.find(g => g.id === goalId);
+  if (!goal) return false;
+
+  goal.current_value = progressValue;
+  
+  // Add progress record
+  const progressRecord: GoalProgress = {
+    id: Math.max(...goalProgress.map(p => p.id), 0) + 1,
+    goal_id: goalId,
+    progress_value: progressValue,
+    notes,
+    recorded_at: new Date().toISOString()
+  };
+  goalProgress.push(progressRecord);
+
+  // Check if goal is completed
+  if (goal.target_value && progressValue >= goal.target_value) {
+    goal.status = 'completed';
+    goal.completed_at = new Date().toISOString();
+  }
+
+  return true;
+};
+
+export const getUserGoals = (userId: number, goalType?: 'daily' | 'weekly'): Goal[] => {
+  return goals.filter(g => {
+    if (g.user_id !== userId) return false;
+    if (goalType && g.goal_type !== goalType) return false;
+    return true;
+  }).sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+};
+
+export const deleteGoal = (goalId: number): boolean => {
+  const index = goals.findIndex(g => g.id === goalId);
+  if (index === -1) return false;
+  
+  goals.splice(index, 1);
+  // Also remove related progress records
+  goalProgress = goalProgress.filter(p => p.goal_id !== goalId);
+  return true;
+};

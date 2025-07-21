@@ -31,7 +31,9 @@ const Sidebar: React.FC = () => {
     if (!user) return [];
 
     const items = [
-      { to: '/dashboard', label: 'Dashboard', icon: Home }
+      { to: '/dashboard', label: 'Dashboard', icon: Home },
+      { to: '/messages', label: 'Messages', icon: MessageSquare },
+      { to: '/goals', label: 'Goals', icon: Target }
     ];
 
     switch (user.role) {
