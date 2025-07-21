@@ -21,6 +21,8 @@ import EnrollStudents from './pages/EnrollStudents';
 import MyEnrollments from './pages/MyEnrollments';
 import CourseSettings from './pages/CourseSettings';
 import Unauthorized from './pages/Unauthorized';
+import Messages from './pages/Messages';
+import Goals from './pages/Goals';
 
 function App() {
   return (
