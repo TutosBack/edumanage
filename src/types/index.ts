@@ -101,3 +101,51 @@ export interface BulkUploadResult {
     error: string;
   }>;
 }
+
+export interface Message {
+  id: number;
+  sender_id: number;
+  receiver_id: number;
+  content: string;
+  message_type: 'text' | 'audio';
+  audio_url?: string;
+  audio_duration?: number;
+  sent_at: string;
+  read_at?: string;
+  is_read: boolean;
+  course_id?: number;
+}
+
+export interface Conversation {
+  id: number;
+  participants: number[];
+  course_id?: number;
+  last_message?: Message;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Goal {
+  id: number;
+  user_id: number;
+  title: string;
+  description: string;
+  goal_type: 'daily' | 'weekly';
+  category: 'academic' | 'personal' | 'course_specific';
+  course_id?: number;
+  target_value?: number;
+  current_value: number;
+  unit?: string;
+  status: 'active' | 'completed' | 'paused' | 'cancelled';
+  due_date: string;
+  created_at: string;
+  completed_at?: string;
+}
+
+export interface GoalProgress {
+  id: number;
+  goal_id: number;
+  progress_value: number;
+  notes?: string;
+  recorded_at: string;
+}

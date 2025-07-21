@@ -1,4 +1,4 @@
-import { User, School, Course, Material, Class, Enrollment, BulkStudentData, BulkUploadResult } from '../types';
+import { User, School, Course, Material, Class, Enrollment, BulkStudentData, BulkUploadResult, Message, Conversation, Goal, GoalProgress } from '../types';
 
 export const schools: School[] = [
   {
