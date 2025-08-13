@@ -15,7 +15,9 @@ import {
   Building2,
   UserPlus,
   FileText,
-  BookOpen
+  BookOpen,
+  MessageSquare,
+  Target
 } from 'lucide-react';
 
 const Sidebar: React.FC = () => {
